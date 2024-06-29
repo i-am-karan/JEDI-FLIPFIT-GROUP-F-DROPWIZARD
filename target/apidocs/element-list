@@ -1,0 +1,9 @@
+com.flipkart.app
+com.flipkart.business
+com.flipkart.business.interfaces
+com.flipkart.constant
+com.flipkart.dao
+com.flipkart.dao.interfaces
+com.flipkart.exceptions
+com.flipkart.model
+com.flipkart.utils
