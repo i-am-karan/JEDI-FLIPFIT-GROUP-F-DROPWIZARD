@@ -1,6 +1,6 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.FlipFitPayments;
+import com.flipkart.model.FlipFitPayments;
 import com.flipkart.constant.DBConstants;
 import com.flipkart.dao.interfaces.IFlipFitPaymentsDAO;
 import java.util.Random;

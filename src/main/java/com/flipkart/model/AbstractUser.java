@@ -1,4 +1,4 @@
-package com.flipkart.bean;
+package com.flipkart.model;
 
 abstract class AbstractUser {
     private int userId;

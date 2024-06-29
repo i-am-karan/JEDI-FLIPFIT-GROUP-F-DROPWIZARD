@@ -1,9 +1,9 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitUser;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitUser;
+import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 
 import java.util.*;

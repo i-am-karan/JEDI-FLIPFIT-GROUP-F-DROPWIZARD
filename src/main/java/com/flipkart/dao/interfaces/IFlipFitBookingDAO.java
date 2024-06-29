@@ -1,6 +1,6 @@
 package com.flipkart.dao.interfaces;
 
-import com.flipkart.bean.FlipFitBooking;
+import com.flipkart.model.FlipFitBooking;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.flipkart.business.interfaces;
 
-import com.flipkart.bean.FlipFitBooking;
+import com.flipkart.model.FlipFitBooking;
 
 public interface IFlipFitBookings{
     public void makeBooking(FlipFitBooking flipFitBooking);

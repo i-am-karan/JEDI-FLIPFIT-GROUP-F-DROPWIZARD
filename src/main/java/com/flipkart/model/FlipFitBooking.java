@@ -1,4 +1,4 @@
-package com.flipkart.bean;
+package com.flipkart.model;
 
 public class FlipFitBooking {
     private int bookingId;

@@ -1,8 +1,8 @@
 package com.flipkart.dao;
-import com.flipkart.bean.FlipFitGymOwner;
+import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.dao.interfaces.IFlipFitBookingDAO;
 import java.sql.*;
-import com.flipkart.bean.FlipFitBooking;
+import com.flipkart.model.FlipFitBooking;
 import java.sql.PreparedStatement;
 import com.flipkart.constant.DBConstants;
 

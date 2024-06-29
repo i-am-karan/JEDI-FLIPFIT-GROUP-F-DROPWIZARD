@@ -1,15 +1,15 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitGymOwner;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.constant.DBConstants;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import java.util.Random;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.flipkart.bean.FlipFitUser;
+import com.flipkart.model.FlipFitUser;
 
 public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
     Random rand = new Random();

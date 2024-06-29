@@ -1,7 +1,7 @@
 package com.flipkart.dao;
 import com.flipkart.dao.interfaces.*;
 import java.sql.*;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitSlots;
 import com.flipkart.constant.DBConstants;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

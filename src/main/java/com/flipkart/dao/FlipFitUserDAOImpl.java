@@ -1,7 +1,7 @@
 package com.flipkart.dao;
 import com.flipkart.constant.DBConstants;
 import com.flipkart.dao.interfaces.*;
-import com.flipkart.bean.FlipFitUser;
+import com.flipkart.model.FlipFitUser;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

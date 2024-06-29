@@ -1,4 +1,4 @@
-package com.flipkart.bean;
+package com.flipkart.model;
 
 public class FlipFitSlots {
     private int slotId;

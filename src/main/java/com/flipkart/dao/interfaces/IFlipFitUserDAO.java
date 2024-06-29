@@ -1,5 +1,5 @@
 package com.flipkart.dao.interfaces;
-import com.flipkart.bean.FlipFitUser;
+import com.flipkart.model.FlipFitUser;
 
 public interface IFlipFitUserDAO {
     public int login(String emailID, String password);

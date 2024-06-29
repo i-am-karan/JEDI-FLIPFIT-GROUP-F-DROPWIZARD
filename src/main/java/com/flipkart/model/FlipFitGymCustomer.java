@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.flipkart.bean;
+package com.flipkart.model;
 
 /**
  * 

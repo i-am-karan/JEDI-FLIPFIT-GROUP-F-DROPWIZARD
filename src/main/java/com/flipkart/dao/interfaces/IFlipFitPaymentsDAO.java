@@ -1,6 +1,6 @@
 package com.flipkart.dao.interfaces;
 
-import com.flipkart.bean.FlipFitPayments;
+import com.flipkart.model.FlipFitPayments;
 
 public interface IFlipFitPaymentsDAO {
     public void setPaymentInfo(FlipFitPayments FFP);
