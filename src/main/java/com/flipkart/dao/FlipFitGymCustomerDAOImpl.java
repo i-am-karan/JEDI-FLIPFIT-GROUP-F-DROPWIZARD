@@ -118,15 +118,42 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
         return false;
     }
 
-    public static void main(String args[]){
-        FlipFitUser FFU = new FlipFitUser();
+    public FlipFitUser addUser(FlipFitUser user) {
+        String sql = "INSERT INTO User (userName, roleID, emailID, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, user.getUserName());
+            stmt.setInt(2, user.getRoleID());
+            stmt.setString(3, user.getEmailID());
+            stmt.setString(4, user.getPhoneNumber());
+            stmt.setString(5, user.getPassword());
+            ResultSet rs = stmt.executeQuery();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
 
-        FFU.setUserName("PP");
-        FFU.setPassword("pp2");
-        FFU.setRoleID(1);
-        FFU.setEmailID("pp@mail");
-        FFU.setPhoneNumber("9800756987");
-        FFU.setUserID(1);
+            int userID = generatedKeys.getInt(1);
+            user.setUserID(userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    @Override
+    public FlipFitGymCustomer addCustomer(FlipFitGymCustomer customer, FlipFitUser user) {
+        String sql = "INSERT INTO Customer (customerID, city, pincode) VALUES (?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, user.getUserID());
+            stmt.setString(2, customer.getCity());
+            stmt.setString(3, customer.getPinCode());
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
+    public static void main(String args[]){
+
 
 
         FlipFitUser FFU1 = new FlipFitUser();
@@ -136,18 +163,15 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
         FFU1.setRoleID(11);
         FFU1.setEmailID("pp1@mail");
         FFU1.setPhoneNumber("98007569871");
-        FFU1.setUserID(2);
 
-//        FlipFitUserDAOImpl FFUDAO = new FlipFitUserDAOImpl();
-//        FFUDAO.addUser(FFU);
-//        FFUDAO.addUser(FFU1);
+        FlipFitUser FFU2 = new FlipFitUser();
 
+        FFU2.setUserName("PP");
+        FFU2.setPassword("pp2");
+        FFU2.setRoleID(1);
+        FFU2.setEmailID("pp@mail");
+        FFU2.setPhoneNumber("9800756987");
 
-        FlipFitGymCustomerDAOImpl FFGCDAO = new FlipFitGymCustomerDAOImpl();
-        List<FlipFitSlots> slots=FFGCDAO.viewBookedSlots(FFU.getUserID());
-        for(FlipFitSlots slot : slots){
-            System.out.println(slot.getSlotId());
-        }
 
 
 

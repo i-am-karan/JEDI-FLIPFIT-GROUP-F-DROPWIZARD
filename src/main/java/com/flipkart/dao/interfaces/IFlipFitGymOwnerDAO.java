@@ -12,4 +12,6 @@ public interface IFlipFitGymOwnerDAO {
     public List<FlipFitGymCentre> viewCentres(FlipFitGymOwner owner);
     List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre centre);
     public boolean editDetails(FlipFitGymOwner owner);
+    public FlipFitUser addUser(FlipFitUser user);
+    public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
 }
