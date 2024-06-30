@@ -1,7 +1,7 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitGymOwner;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
 import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;

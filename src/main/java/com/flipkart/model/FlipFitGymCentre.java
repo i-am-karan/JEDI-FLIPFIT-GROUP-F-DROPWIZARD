@@ -1,6 +1,4 @@
-package com.flipkart.bean;
-
-import java.util.ArrayList;
+package com.flipkart.model;
 
 public class FlipFitGymCentre {
     private int centreID;

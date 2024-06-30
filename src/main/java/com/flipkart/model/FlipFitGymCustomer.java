@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.flipkart.bean;
+package com.flipkart.model;
 
 /**
  * 
  */
-public class FlipFitGymCustomer extends AbstractUser{
+public class FlipFitGymCustomer extends AbstractUser {
 	public int paymentType;
     public String paymentInfo;
     

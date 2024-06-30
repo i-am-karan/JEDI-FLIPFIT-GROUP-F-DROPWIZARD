@@ -1,6 +1,6 @@
 package com.flipkart.business;
-import com.flipkart.bean.FlipFitBooking;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitBooking;
+import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.FlipFitBookingDAOImpl;
 import com.flipkart.dao.FlipFitSlotDAOImpl;
 

@@ -1,4 +1,4 @@
-package com.flipkart.bean;
+package com.flipkart.model;
 
 public class FlipFitGymOwner extends AbstractUser{
     public String panId;

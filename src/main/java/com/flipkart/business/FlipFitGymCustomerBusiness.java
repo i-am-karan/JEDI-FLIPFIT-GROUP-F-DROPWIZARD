@@ -1,5 +1,5 @@
 package com.flipkart.business;
-import com.flipkart.bean.*;
+import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import java.util.List;
 import java.util.Scanner;

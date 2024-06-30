@@ -1,26 +1,24 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipFitAdmin;
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitGymOwner;
+import com.flipkart.dao.interfaces.IFlipFitAdminDAO;
+import com.flipkart.model.FlipFitAdmin;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.business.interfaces.IFlipFitAdmin;
 import com.flipkart.dao.FlipFitAdminDAOImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitAdminBusiness implements IFlipFitAdmin {
-    private FlipFitAdmin FFAdmin;
-    public FlipFitAdminBusiness(FlipFitAdmin FFAdmin){
-        this.FFAdmin=FFAdmin;
+    private final IFlipFitAdminDAO flipFitAdminDAOImpl ;
+    public FlipFitAdminBusiness(FlipFitAdminDAOImpl FFAdmin){
+        this.flipFitAdminDAOImpl=FFAdmin;
     }
 
-    public boolean adminLogin(FlipFitAdmin adminUser){
-        FlipFitAdminDAOImpl flipFitAdminDAOImpl=new FlipFitAdminDAOImpl();
+    public boolean adminLogin(FlipFitAdmin flipFitAdmin){
         System.out.println("AdminUserBusiness.adminLogin");
-        flipFitAdminDAOImpl.adminLogin(adminUser);
-        return true;
+        return flipFitAdminDAOImpl.adminLogin(flipFitAdmin);
     }
     public List<FlipFitGymOwner> getPendingOwnerList(){
         System.out.println("AdminUserBusiness.getPendingOwnerList");

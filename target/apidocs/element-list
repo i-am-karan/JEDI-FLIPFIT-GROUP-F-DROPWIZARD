@@ -6,4 +6,5 @@ com.flipkart.dao
 com.flipkart.dao.interfaces
 com.flipkart.exceptions
 com.flipkart.model
+com.flipkart.restController
 com.flipkart.utils

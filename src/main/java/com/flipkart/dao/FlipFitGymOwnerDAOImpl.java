@@ -1,15 +1,15 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitGymOwner;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.constant.DBConstants;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import java.util.Random;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.flipkart.bean.FlipFitUser;
+import com.flipkart.model.FlipFitUser;
 
 public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
     Random rand = new Random();
@@ -104,4 +104,44 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
         return false;
 
     }
+
+    @Override
+    public FlipFitUser addUser(FlipFitUser user) {
+        String sql = "INSERT INTO User (userName, roleID, emailID, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, user.getUserName());
+            stmt.setInt(2, user.getRoleID());
+            stmt.setString(3, user.getEmailID());
+            stmt.setString(4, user.getPhoneNumber());
+            stmt.setString(5, user.getPassword());
+            ResultSet rs = stmt.executeQuery();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+
+            int userID = generatedKeys.getInt(1);
+            user.setUserID(userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    @Override
+    public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user) {
+        String sql = "INSERT INTO GymOwner (customerID ,PAN, Aadhar, GSTIN, approved) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, user.getUserID());
+            stmt.setString(2, owner.getPanId());
+            stmt.setString(3, owner.getAadharNumber());
+            stmt.setString(4, owner.getGSTNum());
+            stmt.setBoolean(5, true);
+            ResultSet rs = stmt.executeQuery();
+            owner.setUserId(user.getUserID());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return owner;
+    }
+
+
 }

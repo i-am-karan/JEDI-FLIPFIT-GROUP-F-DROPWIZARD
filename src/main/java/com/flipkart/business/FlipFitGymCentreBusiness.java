@@ -1,8 +1,8 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitSlots;
 import com.flipkart.business.interfaces.IFlipFitGymCentre;
 import com.flipkart.dao.FlipFitGymCentreDAOImpl;
 

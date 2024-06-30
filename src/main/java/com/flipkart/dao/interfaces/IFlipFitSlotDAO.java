@@ -1,6 +1,6 @@
 package com.flipkart.dao.interfaces;
 
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitSlots;
 
 import java.util.ArrayList;
 import java.util.List;

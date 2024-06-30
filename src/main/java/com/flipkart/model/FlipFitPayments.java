@@ -1,5 +1,4 @@
-package com.flipkart.bean;
-
+package com.flipkart.model;
 public class FlipFitPayments {
     private int userID;
     // 1 -> UPI / 2 -> Debit Card

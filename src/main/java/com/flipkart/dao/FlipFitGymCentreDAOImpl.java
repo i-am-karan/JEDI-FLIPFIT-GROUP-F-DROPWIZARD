@@ -2,9 +2,9 @@ package com.flipkart.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
-import com.flipkart.bean.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCentre;
 import com.flipkart.constant.DBConstants;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitSlots;
 
 public class FlipFitGymCentreDAOImpl {
     Random rand = new Random();

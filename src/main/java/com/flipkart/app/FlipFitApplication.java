@@ -4,6 +4,10 @@ package com.flipkart.app;
  * Hello world!
  *
  */
+import com.flipkart.business.FlipFitAdminBusiness;
+import com.flipkart.business.interfaces.IFlipFitAdmin;
+import com.flipkart.dao.FlipFitAdminDAOImpl;
+import com.flipkart.restController.AdminController;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
@@ -21,7 +25,9 @@ public class FlipFitApplication extends Application<Configuration> {
     @Override
     public void run(Configuration c, Environment e) throws Exception {
         LOGGER.info("Registering REST resources");
-
+        FlipFitAdminDAOImpl flipFitAdminDAO = new FlipFitAdminDAOImpl();
+        FlipFitAdminBusiness flipFitAdmin = new FlipFitAdminBusiness(flipFitAdminDAO);
+        e.jersey().register(new AdminController(flipFitAdmin));
         System.out.println("HERE");
     }
 

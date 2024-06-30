@@ -1,6 +1,6 @@
 package com.flipkart.business.interfaces;
 
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitSlots;
 
 import java.util.List;
 

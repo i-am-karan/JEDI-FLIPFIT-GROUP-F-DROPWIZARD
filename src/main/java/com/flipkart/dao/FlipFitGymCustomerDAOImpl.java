@@ -1,13 +1,12 @@
 package com.flipkart.dao;
-
-import com.flipkart.bean.FlipFitGymCentre;
-import com.flipkart.bean.FlipFitGymCustomer;
-import com.flipkart.bean.FlipFitUser;
-import com.flipkart.bean.FlipFitSlots;
+import com.flipkart.model.FlipFitGymCentre;
+import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.model.FlipFitUser;
+import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 
 import java.util.*;
-import java.sql.*;
+        import java.sql.*;
 
 
 public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
@@ -118,41 +117,38 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
         return false;
     }
 
-    public static void main(String args[]){
-        FlipFitUser FFU = new FlipFitUser();
+    public FlipFitUser addUser(FlipFitUser user) {
+        String sql = "INSERT INTO User (userName, roleID, emailID, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, user.getUserName());
+            stmt.setInt(2, user.getRoleID());
+            stmt.setString(3, user.getEmailID());
+            stmt.setString(4, user.getPhoneNumber());
+            stmt.setString(5, user.getPassword());
+            ResultSet rs = stmt.executeQuery();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
 
-        FFU.setUserName("PP");
-        FFU.setPassword("pp2");
-        FFU.setRoleID(1);
-        FFU.setEmailID("pp@mail");
-        FFU.setPhoneNumber("9800756987");
-        FFU.setUserID(1);
-
-
-        FlipFitUser FFU1 = new FlipFitUser();
-
-        FFU1.setUserName("PP1");
-        FFU1.setPassword("pp21");
-        FFU1.setRoleID(11);
-        FFU1.setEmailID("pp1@mail");
-        FFU1.setPhoneNumber("98007569871");
-        FFU1.setUserID(2);
-
-//        FlipFitUserDAOImpl FFUDAO = new FlipFitUserDAOImpl();
-//        FFUDAO.addUser(FFU);
-//        FFUDAO.addUser(FFU1);
-
-
-        FlipFitGymCustomerDAOImpl FFGCDAO = new FlipFitGymCustomerDAOImpl();
-        List<FlipFitSlots> slots=FFGCDAO.viewBookedSlots(FFU.getUserID());
-        for(FlipFitSlots slot : slots){
-            System.out.println(slot.getSlotId());
+            int userID = generatedKeys.getInt(1);
+            user.setUserID(userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return user;
+    }
 
 
-
-
-
-
+    @Override
+    public FlipFitGymCustomer addCustomer(FlipFitGymCustomer customer, FlipFitUser user) {
+        String sql = "INSERT INTO Customer (customerID, city, pincode) VALUES (?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, user.getUserID());
+            stmt.setString(2, customer.getCity());
+            stmt.setString(3, customer.getPinCode());
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
     }
 }
+
