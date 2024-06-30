@@ -26,4 +26,5 @@ public class AdminController {
     public boolean adminLogin(FlipFitAdmin flipFitAdmin) {
         return flipFitAdminBusiness.adminLogin(flipFitAdmin);
     }
+
 }
