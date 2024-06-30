@@ -1,7 +1,6 @@
 package com.flipkart.business;
 import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
 import com.flipkart.dao.FlipFitUserDAOImpl;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import java.util.List;
@@ -67,8 +66,9 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
         FlipFitGymCustomerDAOImpl flipFitGymCustomerDAO = new FlipFitGymCustomerDAOImpl();
         FlipFitUser flipFitUser = new FlipFitUser();
         flipFitUser.setPassword(flipFitGymCustomer.getPassword());
-        flipFitUser.setUserID(flipFitGymCustomer.getUserId());
         flipFitUser.setEmailID(flipFitGymCustomer.getEmailID());
+        flipFitUser.setPhoneNumber(flipFitGymCustomer.getPhoneNumber());
+        flipFitUser.setUserName(flipFitGymCustomer.getUserName());
         flipFitUser.setRoleID(1);
         return flipFitGymCustomerDAO.addCustomer(flipFitGymCustomer, flipFitUser);
     }
