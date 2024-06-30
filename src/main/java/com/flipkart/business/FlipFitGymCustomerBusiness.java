@@ -4,9 +4,6 @@ import com.flipkart.dao.interfaces.IFlipFitAdminDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import java.util.List;
-import java.util.Scanner;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
-import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
 
 public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {

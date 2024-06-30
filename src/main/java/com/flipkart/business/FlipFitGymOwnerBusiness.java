@@ -5,11 +5,8 @@ import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
-import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
-import com.flipkart.business.FlipFitAdminBusiness;
 import java.util.List;
-import java.util.Scanner;
 
 public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
     private final IFlipFitGymOwnerDAO flipFitGymOwnerDAO ;

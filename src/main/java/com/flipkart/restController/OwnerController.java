@@ -1,19 +1,9 @@
 package com.flipkart.restController;
-
-import com.flipkart.business.FlipFitAdminBusiness;
-import com.flipkart.business.FlipFitGymCustomerBusiness;
-import com.flipkart.business.interfaces.IFlipFitAdmin;
-import com.flipkart.dao.FlipFitAdminDAOImpl;
 import com.flipkart.exceptions.InvalidChoiceException;
 import com.flipkart.model.*;
-import  com.flipkart.business.interfaces.IFlipFitGymCustomer;
-
 import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
 import com.flipkart.business.FlipFitGymOwnerBusiness;

@@ -1,13 +1,10 @@
 package com.flipkart.business;
 import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
 import com.flipkart.dao.interfaces.IFlipFitBookingDAO;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 import com.flipkart.model.FlipFitBooking;
 import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.FlipFitBookingDAOImpl;
 import com.flipkart.dao.FlipFitSlotDAOImpl;
-import com.flipkart.business.FlipFitGymCustomerBusiness;
-import java.util.Random;
 
 public class BookingsBusiness {
     private final IFlipFitBookingDAO bookingDAO ;
