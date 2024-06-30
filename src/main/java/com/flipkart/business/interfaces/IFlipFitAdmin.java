@@ -1,9 +1,6 @@
 package com.flipkart.business.interfaces;
 
-import com.flipkart.model.FlipFitAdmin;
-import com.flipkart.model.FlipFitGymCentre;
-import com.flipkart.model.FlipFitGymCustomer;
-import com.flipkart.model.FlipFitGymOwner;
+import com.flipkart.model.*;
 
 import java.util.List;
 
@@ -13,6 +10,6 @@ public interface IFlipFitAdmin {
     public List<FlipFitGymOwner> getApprovedOwnerList();
     public List<FlipFitGymCustomer> getUserList();
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId);
-    public boolean validateOwner(int ownerId);
+    public boolean validateOwner(FlipFitGymOwner owner, FlipFitUser user);
     public boolean deleteOwner(int ownerId);
 }

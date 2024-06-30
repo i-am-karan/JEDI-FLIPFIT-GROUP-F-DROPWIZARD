@@ -1,18 +1,25 @@
 package com.flipkart.dao.interfaces;
 
-import com.flipkart.model.FlipFitAdmin;
-import com.flipkart.model.FlipFitGymCentre;
-import com.flipkart.model.FlipFitGymCustomer;
-import com.flipkart.model.FlipFitGymOwner;
+import com.flipkart.model.*;
 
 import java.util.List;
 
 public interface IFlipFitAdminDAO {
     public boolean adminLogin(FlipFitAdmin flipFitAdmin);
+
     public List<FlipFitGymOwner> getPendingOwnerList();
+
     public List<FlipFitGymOwner> getApprovedOwnerList();
+
     public List<FlipFitGymCustomer> getUserList();
+
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId);
+
     public boolean validateOwner(int ownerId);
+
     public boolean deleteOwner(int ownerId);
+
+    public FlipFitUser addUser(FlipFitUser user);
+
+    public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
 }
