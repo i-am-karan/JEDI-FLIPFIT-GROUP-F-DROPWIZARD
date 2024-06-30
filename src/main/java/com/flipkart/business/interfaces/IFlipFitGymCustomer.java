@@ -8,4 +8,5 @@ public interface IFlipFitGymCustomer {
     public void viewCentres();
     public boolean makePayment(int userId);
     public boolean editDetails(int userId) throws InvalidChoiceException;
+    public void registerCustomer();
 }

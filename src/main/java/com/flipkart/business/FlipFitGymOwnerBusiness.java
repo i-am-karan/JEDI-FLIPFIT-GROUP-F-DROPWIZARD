@@ -1,10 +1,11 @@
 package com.flipkart.business;
 
-import com.flipkart.model.FlipFitGymCustomer;
+import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
 import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
 import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
+import com.flipkart.model.FlipFitUser;
 
 import java.util.Scanner;
 
@@ -87,5 +88,40 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
             ExceptionHandler.InvalidChoiceEditDetailsMenu(e);
             return false;
         }
+    }
+
+    public void registerOwner(){
+        Scanner sc=new Scanner(System.in);
+        FlipFitUser user = new FlipFitUser();
+        System.out.println("Enter Name : ");
+        String Name = sc.next();
+        user.setUserName(Name);
+        System.out.println("Enter Phone Number : ");
+        String PhoneNumber = sc.next();
+        user.setPhoneNumber(PhoneNumber);
+        System.out.println("Enter Email : ");
+        String Email = sc.next();
+        user.setEmailID(Email);
+        System.out.println("Enter Password : ");
+        String Password = sc.next();
+        user.setPassword(Password);
+
+        FlipFitGymOwner owner = new FlipFitGymOwner();
+        System.out.println("Enter panID : ");
+        String panID = sc.next();
+        owner.setPanId(panID);
+
+        System.out.println("Enter Aadhar Number : ");
+        String aadharNumber = sc.next();
+        owner.setAadharNumber(aadharNumber);
+
+        System.out.println("Enter GST Number : ");
+        String gstNumber = sc.next();
+        owner.setGSTIN(gstNumber);
+
+        FlipFitGymOwnerDAOImpl flipFitGymOwnerDAO = new FlipFitGymOwnerDAOImpl();
+        flipFitGymOwnerDAO.addUser(user);
+        flipFitGymOwnerDAO.addGymOwner(owner,user);
+
     }
 }

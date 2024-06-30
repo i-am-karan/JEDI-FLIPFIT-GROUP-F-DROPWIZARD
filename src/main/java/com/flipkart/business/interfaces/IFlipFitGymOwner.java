@@ -8,4 +8,5 @@ public interface IFlipFitGymOwner {
     public void viewFlipFitCustomers();
     public void viewPayments();
     public boolean editDetails() throws InvalidChoiceException;
+    public void registerOwner();
 }

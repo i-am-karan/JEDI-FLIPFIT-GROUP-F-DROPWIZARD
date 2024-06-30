@@ -1,4 +1,5 @@
 package com.flipkart.business;
+import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import java.util.List;
@@ -10,11 +11,6 @@ import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
 
 public class FlipFitGymCustomerBusiness implements  IFlipFitGymCustomer {
-
-    public void registerCustomer(String username) {
-        System.out.println("Registering Customer " + username);
-    }
-
 
     @Override
     public void viewBookedSlots(int userId) {
@@ -101,5 +97,31 @@ public class FlipFitGymCustomerBusiness implements  IFlipFitGymCustomer {
             ExceptionHandler.InvalidChoiceEditDetailsMenu(e);
             return false;
         }
+    }
+
+    @Override
+    public void registerCustomer() {
+        Scanner sc=new Scanner(System.in);
+        FlipFitUser user = new FlipFitUser();
+        System.out.println("Enter Name : ");
+        String Name = sc.next();
+        user.setUserName(Name);
+        System.out.println("Enter Phone Number : ");
+        String PhoneNumber = sc.next();
+        user.setPhoneNumber(PhoneNumber);
+        System.out.println("Enter Email : ");
+        String Email = sc.next();
+        user.setEmailID(Email);
+        System.out.println("Enter Password : ");
+        String Password = sc.next();
+        user.setPassword(Password);
+
+        FlipFitGymCustomer customer=new FlipFitGymCustomer();
+        System.out.println("Enter Payment Type : 1. UPI  2. Cards");
+        int paymentType=sc.nextInt();
+
+        FlipFitGymCustomerDAOImpl flipFitGymCustomerDAO = new FlipFitGymCustomerDAOImpl();
+        flipFitGymCustomerDAO.addUser(user);
+        flipFitGymCustomerDAO.addCustomer(customer,user);
     }
 }
