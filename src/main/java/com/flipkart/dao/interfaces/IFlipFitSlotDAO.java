@@ -9,7 +9,7 @@ public interface IFlipFitSlotDAO {
     public boolean addSlot(FlipFitSlots slot);
     public boolean deleteSlot(int slotId);
     public boolean changeSlot(FlipFitSlots slot);
-    public List<FlipFitSlots> getAllSlots(int slotID);
+    public List<FlipFitSlots> getAllSlots(int centreID);
     public FlipFitSlots getSlotDetailsById(int slotId);
     public FlipFitSlots getSlotDetails(int startTime, int centreID);
 }

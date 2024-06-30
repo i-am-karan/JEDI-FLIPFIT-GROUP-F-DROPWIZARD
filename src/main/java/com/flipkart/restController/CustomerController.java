@@ -53,12 +53,12 @@ public class CustomerController {
         return flipFitCustomerBusiness.viewBookedSlots(flipFitGymCustomer.getUserId());
     }
 
-    @GET
-    @Path("/checkingConflicts/{startTime}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean checkBookingConflicts(@PathParam("startTime") @NotBlank int startTime){
-        return flipFitCustomerBusiness.checkBookingConflicts(flipFitGymCustomer.getUserId(), startTime);
-    }
+//    @GET
+//    @Path("/checkingConflicts/{startTime}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public boolean checkBookingConflicts(@PathParam("startTime") @NotBlank int startTime){
+//        return flipFitCustomerBusiness.checkBookingConflicts(flipFitGymCustomer.getUserId(), startTime);
+//    }
     @GET
     @Path("/viewCentres")
     @Consumes(MediaType.APPLICATION_JSON)

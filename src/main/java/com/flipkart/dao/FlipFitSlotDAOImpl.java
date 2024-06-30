@@ -135,7 +135,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
     }
 
     @Override
-    public List<FlipFitSlots> getAllSlots(int CenterID) {
+    public List<FlipFitSlots> getAllSlots(int centreID) {
         List<FlipFitSlots> slots = new ArrayList<>();
 
         try {
@@ -143,17 +143,20 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE centerId = ?");
-            stmt.setInt(1, CenterID);
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE centreID = ?");
+            stmt.setInt(1, centreID);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int slotID = rs.getInt("slotId");
-                int centreID = rs.getInt("centerId");
-                long StartTime = rs.getLong("startTime");
+                int slotID = rs.getInt("slotID");
+                int StartTime = rs.getInt("slotTime");
                 int SeatsAvailable = rs.getInt("seatsAvailable");
 
                 FlipFitSlots slot = new FlipFitSlots();
+                slot.setSlotId(slotID);
+                slot.setCentreId(centreID);
+                slot.setSlotTime(StartTime);
+                slot.setSeatsAvailable(SeatsAvailable);
                 slots.add(slot);
             }
             rs.close();

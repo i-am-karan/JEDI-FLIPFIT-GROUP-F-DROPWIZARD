@@ -70,8 +70,4 @@ public class OwnerController {
     public FlipFitGymOwner editDetails(FlipFitGymOwner flipFitGymOwner) throws InvalidChoiceException{
         return flipFitGymOwnerBusiness.editDetails(flipFitGymOwner);
     }
-
-
-
-
 }

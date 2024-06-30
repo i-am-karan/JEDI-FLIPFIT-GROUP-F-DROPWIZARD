@@ -58,7 +58,8 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         user.setEmailID(GymOwner.getEmailID());
         user.setPhoneNumber(GymOwner.getPhoneNumber());
         user.setUserName(GymOwner.getUserName());
-        user.setRoleID(1);
+        user.setRoleID(2);
+
         flipFitGymOwnerDAO.addUser(user);
         return flipFitGymOwnerDAO.addGymOwner(GymOwner, user);
     }
