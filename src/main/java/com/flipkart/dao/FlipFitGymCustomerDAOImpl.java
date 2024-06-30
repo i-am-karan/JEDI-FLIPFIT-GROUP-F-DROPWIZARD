@@ -1,8 +1,5 @@
 package com.flipkart.dao;
-import com.flipkart.model.FlipFitGymCentre;
-import com.flipkart.model.FlipFitGymCustomer;
-import com.flipkart.model.FlipFitUser;
-import com.flipkart.model.FlipFitSlots;
+import com.flipkart.model.*;
 import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 
 import java.util.*;
@@ -33,19 +30,25 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
     }
 
     @Override
-    public boolean checkBookingConflicts(int userId, int slotTime) {
+    public FlipFitBooking checkBookingConflicts(int userId, int slotTime) {
         String sql = "SELECT * FROM Booking WHERE userID = ? and slotTime = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, userId);
             stmt.setInt(2, slotTime);
             ResultSet rs = stmt.executeQuery();
+            FlipFitBooking booking = new FlipFitBooking();
             if(rs!=null) {
-                return true; // there is a conflict
+                booking.setSlotTime(rs.getInt("slotTime"));
+                booking.setSlotId(rs.getInt("slotID"));
+                booking.setUserId(userId);
+                booking.setBookingId(rs.getInt("bookingID"));
+                booking.setIsdeleted(rs.getBoolean("isDeleted"));
+                return booking; // there is a conflict
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     @Override
