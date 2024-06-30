@@ -1,5 +1,4 @@
 package com.flipkart.dao;
-import com.flipkart.model.FlipFitGymOwner;
 import com.flipkart.dao.interfaces.IFlipFitBookingDAO;
 import java.sql.*;
 import com.flipkart.model.FlipFitBooking;
@@ -51,23 +50,29 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
 
     @Override
     public FlipFitBooking makeBooking(FlipFitBooking booking) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
-
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO Booking VALUES (?, ?, ?)");
+        String sql = "INSERT INTO Booking (userID, slotTime, slotID) VALUES (?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getUserId());
-            stmt.setInt(2, booking.getSlotId());
-            stmt.setBoolean(3, booking.isdeleted());
+            stmt.setInt(2, booking.getSlotTime());
+            stmt.setInt(3, booking.getSlotId());
 
-            int i = stmt.executeUpdate();
-            System.out.println(i + " records inserted");
+            int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
+            if (affectedRows == 0) {
+                throw new SQLException("Creating booking failed, no rows affected.");
+            }
 
-            con.close();
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int bookingID = generatedKeys.getInt(1);
+                    booking.setBookingId(bookingID);
+                    booking.setIsdeleted(false);
+                } else {
+                    throw new SQLException("Creating booking failed, no ID obtained.");
+                }
+            }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return booking;
     }

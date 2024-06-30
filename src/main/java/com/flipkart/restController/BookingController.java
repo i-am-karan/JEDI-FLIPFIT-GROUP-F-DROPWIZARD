@@ -36,7 +36,7 @@ public class BookingController {
     @POST
     @Path("/add/{centreID}/{startTime}/{userID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public FlipFitBooking addBooking(@PathParam("centreID") @NotBlank int centreID, @PathParam("startTime") @NotBlank int startTime, @PathParam("userID") @NotBlank int userID){
+    public FlipFitBooking addBooking(@PathParam("centreID") int centreID, @PathParam("startTime") int startTime, @PathParam("userID") int userID){
         return bookingService.makeBooking(userID, centreID, startTime);
     }
     @DELETE
