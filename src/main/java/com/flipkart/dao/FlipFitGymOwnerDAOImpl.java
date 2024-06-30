@@ -1,44 +1,42 @@
 package com.flipkart.dao;
 
 import com.flipkart.model.FlipFitGymCentre;
-import com.flipkart.model.FlipFitGymCustomer;
 import com.flipkart.model.FlipFitGymOwner;
-import com.flipkart.constant.DBConstants;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import java.util.Random;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.flipkart.model.FlipFitUser;
-import com.flipkart.model.FlipFitGymCentre;
+
 public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
     Random rand = new Random();
     @Override
     public FlipFitGymCentre addCentre(FlipFitGymCentre centre) {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
+        String sql = "INSERT INTO GymCentre (ownerID, capacity, approved, city, state, pincode) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, centre.getOwnerID());
+            stmt.setInt(2, centre.getCapacity());
+            stmt.setBoolean(3, centre.isApproved());
+            stmt.setString(4, centre.getCity());
+            stmt.setString(5, centre.getState());
+            stmt.setString(6, centre.getPincode());
+            int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
+            if (affectedRows == 0) {
+                throw new SQLException("Creating centre failed, no rows affected.");
+            }
 
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO GymCentre VALUES (?, ?, ?, ?, ?, ?, ?)");
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int centreID = generatedKeys.getInt(1);
+                    centre.setCentreID(centreID);
+                } else {
+                    throw new SQLException("Creating centre failed, no ID obtained.");
+                }
+            }
 
-
-            // Generate random integers in range 0 to 999
-            centre.setCentreID(rand.nextInt(1000));
-            stmt.setInt(1, centre.getCentreID());
-            stmt.setInt(2, centre.getOwnerID());
-            stmt.setInt(3, centre.getCapacity());
-            stmt.setBoolean(4, centre.isApproved());
-            stmt.setString(5, centre.getCity());
-            stmt.setString(6, centre.getState());
-            stmt.setString(7, centre.getPincode());
-
-            int i = stmt.executeUpdate();
-            System.out.println(i + " user added");
-
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return centre;
     }
@@ -135,13 +133,13 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
 
     @Override
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user) {
-        String sql = "INSERT INTO GymOwner (customerID ,PAN, Aadhar, GSTIN, approved) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO GymOwner (ownerID ,PAN, Aadhar, GSTIN, approved) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, user.getUserID());
             stmt.setString(2, owner.getPanId());
             stmt.setString(3, owner.getAadharNumber());
             stmt.setString(4, owner.getGSTNum());
-            stmt.setBoolean(5, true);
+            stmt.setBoolean(5, false);
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
             if (affectedRows == 0) {
                 throw new SQLException("Creating owner failed, no rows affected.");
