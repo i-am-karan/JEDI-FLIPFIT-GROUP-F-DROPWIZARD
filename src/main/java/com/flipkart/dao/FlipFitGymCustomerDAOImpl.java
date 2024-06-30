@@ -35,15 +35,16 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO{
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, userId);
             stmt.setInt(2, slotTime);
-            ResultSet rs = stmt.executeQuery();
-            FlipFitBooking booking = new FlipFitBooking();
-            if(rs!=null) {
-                booking.setSlotTime(rs.getInt("slotTime"));
-                booking.setSlotId(rs.getInt("slotID"));
-                booking.setUserId(userId);
-                booking.setBookingId(rs.getInt("bookingID"));
-                booking.setIsdeleted(rs.getBoolean("isDeleted"));
-                return booking; // there is a conflict
+            try(ResultSet rs = stmt.executeQuery()) {
+                if(rs.next()) {
+                    FlipFitBooking booking = new FlipFitBooking();
+                    booking.setSlotTime(rs.getInt("slotTime"));
+                    booking.setSlotId(rs.getInt("slotID"));
+                    booking.setUserId(userId);
+                    booking.setBookingId(rs.getInt("bookingID"));
+                    booking.setIsdeleted(rs.getBoolean("isDeleted"));
+                    return booking;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

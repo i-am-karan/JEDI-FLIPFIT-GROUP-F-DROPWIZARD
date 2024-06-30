@@ -50,11 +50,12 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
 
     @Override
     public FlipFitBooking makeBooking(FlipFitBooking booking) {
-        String sql = "INSERT INTO Booking (userID, slotTime, slotID) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Booking (userID, slotTime, slotID, isDeleted) VALUES (?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getUserId());
             stmt.setInt(2, booking.getSlotTime());
             stmt.setInt(3, booking.getSlotId());
+            stmt.setBoolean(4, false);
 
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
             if (affectedRows == 0) {
@@ -79,26 +80,17 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
 
     @Override
     public boolean deleteBooking(int bookingId) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
-
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM Booking WHERE id = ?");
+        String sql = "DELETE FROM Booking WHERE bookingID = ?";
+        try(Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, bookingId);
-
-            int i = stmt.executeUpdate();
-            System.out.println(i + " records deleted");
-
-            con.close();
-
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting booking failed, no rows affected.");
+            }
             return true;
-
-        } catch (Exception e) {
-            System.out.println(e);
-
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
     @Override
@@ -188,11 +180,12 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
                     booking.setBookingId(rs.getInt("bookingID"));
                     booking.setSlotId(rs.getInt("slotID"));
                     booking.setSlotTime(rs.getInt("slotTime"));
+                    return booking;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return booking;
+        return null;
     }
 }
