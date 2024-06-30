@@ -22,10 +22,6 @@ import java.util.List;
 @Path("/customer")
 @Produces(MediaType.APPLICATION_JSON)
 
-//public boolean makePayment(int userId);
-//public boolean editDetails(int userId) throws InvalidChoiceException;
-//public void registerCustomer();
-
 public class CustomerController {
     private final IFlipFitGymCustomer flipFitCustomerBusiness;
     private FlipFitGymCustomer flipFitGymCustomer;
@@ -61,7 +57,7 @@ public class CustomerController {
     @Path("/checkingConflicts/{startTime}")
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean checkBookingConflicts(@PathParam("startTime") @NotBlank int startTime){
-        return flipFitCustomerBusiness.checkBookingConflicts(startTime);
+        return flipFitCustomerBusiness.checkBookingConflicts(flipFitGymCustomer.getUserId(), startTime);
     }
     @GET
     @Path("/viewCentres")

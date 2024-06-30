@@ -30,21 +30,24 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
     }
 
     @Override
-    public boolean checkBookingConflicts(int startTime) {
-        System.out.println("Checking conflict for slot " + startTime);
+    public boolean checkBookingConflicts(int userId, int slotTime) {
+        System.out.println("Checking conflict for slot " + slotTime);
+        flipFitGymCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
         return true;
     }
     @Override
     public List<FlipFitGymCentre> viewCentres() {
         System.out.println("view centres called:> ");
-        return null;
+        return flipFitGymCustomerDAOImpl.viewCentres();
     }
 
     public boolean makePayment(int userId) {
         System.out.println("Make payment called:> ");
+        flipFitGymCustomerDAOImpl.makePayment(userId);
         return true;
     }
     public FlipFitGymCustomer editDetails(FlipFitGymCustomer flipFitGymCustomer) throws InvalidChoiceException{
+        return flipFitGymCustomerDAOImpl.editDetails(flipFitGymCustomer);
 //        try
 //        {
 //
@@ -61,7 +64,7 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
 //            ExceptionHandler.InvalidChoiceEditDetailsMenu(e);
 //            return null;
 //        }
-        return  null;
+
     }
     @Override
     public FlipFitGymCustomer registerCustomer(FlipFitGymCustomer flipFitGymCustomer) {
