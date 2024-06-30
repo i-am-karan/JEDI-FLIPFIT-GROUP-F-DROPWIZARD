@@ -44,11 +44,11 @@ public class OwnerController {
         return owner;
     }
 
-    @PUT
+    @POST
     @Path("/addCentre")
     @Consumes(MediaType.APPLICATION_JSON)
     public FlipFitGymCentre addGymCentre(FlipFitGymCentre flipFitGymCentre) throws InvalidChoiceException{
-        flipFitGymCentre.setOwnerID(flipFitOwner.getUserId());
+//        flipFitGymCentre.setOwnerID(flipFitOwner.getUserId());
         return flipFitGymOwnerBusiness.addCentre(flipFitGymCentre) ;
     }
     @GET
