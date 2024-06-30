@@ -73,6 +73,7 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
         flipFitUser.setPhoneNumber(flipFitGymCustomer.getPhoneNumber());
         flipFitUser.setUserName(flipFitGymCustomer.getUserName());
         flipFitUser.setRoleID(1);
+        flipFitUser=flipFitGymCustomerDAO.addUser(flipFitUser);
         return flipFitGymCustomerDAOImpl.addCustomer(flipFitGymCustomer, flipFitUser);
     }
     @Override
