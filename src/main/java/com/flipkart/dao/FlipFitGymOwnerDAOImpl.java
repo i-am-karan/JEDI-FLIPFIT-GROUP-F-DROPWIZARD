@@ -42,10 +42,12 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
     }
 
     @Override
-    public List<FlipFitGymCentre> viewCentres(FlipFitGymOwner owner) {
+    public List<FlipFitGymCentre> viewCentresByOwnerID(FlipFitGymOwner owner) {
         List<FlipFitGymCentre> gymcentres = new ArrayList<>();
-        String sql = "SELECT centreID, ownerID, capacity FROM GymCentre where ownerID=owner.userID";
+        int userId = owner.getUserId();
+        String sql = "SELECT centreID, ownerID, capacity FROM GymCentre where ownerID=?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 FlipFitGymCentre gymcentre = new FlipFitGymCentre();
@@ -62,24 +64,27 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
         return gymcentres;
     }
 
-    @Override
-    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre centre) {
-        List<FlipFitUser> flipfitusers = new ArrayList<>();
-        String sql = "SELECT userID from Booking where userID = centre.centreID";
-        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                FlipFitUser flipfituser = new FlipFitUser();
-                flipfituser.setUserID(rs.getInt("userID"));
-                flipfitusers.add(flipfituser);
-            }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+//    @Override
+//    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre centre) {
+//        List<FlipFitUser> flipfitusers = new ArrayList<>();
+//        String sql = "SELECT * from Booking where userID = ? and isDeleted = false";
+//        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+//            stmt.setInt(1, centre.getOwnerID());
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                FlipFitUser flipfituser = new FlipFitUser();
+//                flipfituser.setUserID(rs.getInt("userID"));
+//                flipfitusers.add(flipfituser);
+//            }
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return flipfitusers;
+//   }
 
-        return flipfitusers;
-    }
+
 
 
     @Override

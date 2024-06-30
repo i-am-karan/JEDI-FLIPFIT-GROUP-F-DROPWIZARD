@@ -1,9 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.dao.*;
 import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
-import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
-import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
-import com.flipkart.dao.FlipFitUserDAOImpl;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
@@ -23,13 +21,19 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         return flipFitGymOwnerDAO.addCentre(flipFitGymCentre);
     }
 
+    public FlipFitSlots addSlot(FlipFitSlots flipFitSlot){
+        FlipFitSlotDAOImpl flipFitSlotDAOImpl = new FlipFitSlotDAOImpl();
+        flipFitSlotDAOImpl.addSlot(flipFitSlot);
+        return flipFitSlot;
+    }
+
     public List<FlipFitGymCentre> viewCentres(FlipFitGymOwner flipFitGymOwner) {
         System.out.println("Centres listed:> ");
-        return flipFitGymOwnerDAO.viewCentres(flipFitGymOwner);
+        return flipFitGymOwnerDAO.viewCentresByOwnerID(flipFitGymOwner);
     }
-    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
-        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
-    }
+//    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
+//        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
+//    }
     public List<FlipFitPayments> viewPayments() {
         System.out.println("Payments listed:> ");
         return null;

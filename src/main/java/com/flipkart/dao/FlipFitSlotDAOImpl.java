@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
@@ -56,28 +55,30 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
 
 
     @Override
-    public boolean addSlot(FlipFitSlots slot) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
+    public FlipFitSlots addSlot(FlipFitSlots slot) {
+        String sql = "INSERT INTO Slots (centreID, slotTime, seatsAvailable) VALUES (?, ?, ?)";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, slot.getCentreId());
+            stmt.setInt(2, slot.getSlotTime());
+            stmt.setInt(3, slot.getSeatsAvailable());
 
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO Slot (slotId, centerId, startTime, seatsAvailable) VALUES (?, ?, ?, ?)");
+            int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
+            if (affectedRows == 0) {
+                throw new SQLException("Creating slot failed, no rows affected.");
+            }
 
-            stmt.setInt(1, slot.getSlotId());
-            stmt.setInt(2, slot.getCentreId());
-            stmt.setLong(3, slot.getSlotTime());
-            stmt.setInt(4, slot.getSeatsAvailable());
-            int i = stmt.executeUpdate();
-            System.out.println(i + " slot added");
-            con.close();
-
-            return i>0;
-
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int slotID = generatedKeys.getInt(1);
+                    slot.setSlotId(slotID);
+                } else {
+                    throw new SQLException("Creating slot failed, no ID obtained.");
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error adding slot: " + e);
         }
-        return false; // Return false if deletion failed
+        return slot;
     }
 
 
