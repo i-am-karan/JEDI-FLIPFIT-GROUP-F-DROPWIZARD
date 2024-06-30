@@ -39,6 +39,7 @@ com/flipkart/dao/interfaces/IFlipFitPaymentsDAO.class
 com/flipkart/model/FlipFitUser.class
 com/flipkart/model/FlipFitBooking.class
 com/flipkart/model/FlipFitSlots.class
+com/flipkart/restController/CustomerController.class
 com/flipkart/dao/FlipFitSlotDAOImpl.class
 com/flipkart/utils/DB.class
 com/flipkart/dao/interfaces/IFlipFitSlotDAO.class
