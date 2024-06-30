@@ -89,7 +89,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM Slot WHERE slotId = ?");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM Slots WHERE slotId = ?");
 
             stmt.setInt(1, slotID);
 
@@ -114,7 +114,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("UPDATE Slot SET centerId = ?, startTime = ?, seatsAvailable = ? WHERE slotId = ?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE Slots SET centerId = ?, startTime = ?, seatsAvailable = ? WHERE slotId = ?");
 
             stmt.setInt(1, slot.getCentreId());
             stmt.setLong(2, slot.getSlotTime());
@@ -144,7 +144,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE centreID = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slots WHERE centreID = ?");
             stmt.setInt(1, centreID);
 
             ResultSet rs = stmt.executeQuery();
@@ -182,7 +182,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         try {
             Connection con = GetConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE startTime = ? AND centerId = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slots WHERE startTime = ? AND centerId = ?");
             stmt.setLong(1, startTime);
             stmt.setLong(2, centreID);
 
