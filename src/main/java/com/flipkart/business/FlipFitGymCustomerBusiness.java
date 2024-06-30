@@ -11,8 +11,8 @@ import com.flipkart.exceptions.InvalidChoiceException;
 
 public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
     private final IFlipFitGymCustomerDAO flipFitGymCustomerDAOImpl ;
-    public FlipFitGymCustomerBusiness(FlipFitGymCustomerDAOImpl FFAdmin){
-        this.flipFitGymCustomerDAOImpl=FFAdmin;
+    public FlipFitGymCustomerBusiness(FlipFitGymCustomerDAOImpl FFGymCustomer){
+        this.flipFitGymCustomerDAOImpl=FFGymCustomer;
     }
 
     @Override

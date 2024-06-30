@@ -28,15 +28,16 @@ import com.flipkart.business.interfaces.IFlipFitBookings;
 
 public class BookingController {
     private final IFlipFitBookings bookingService;
+
     @Inject
     public BookingController(BookingsBusiness bookingsService) {
         this.bookingService = (IFlipFitBookings) bookingsService;
     }
     @POST
-    @Path("/add/{centreID}/{startTime}")
+    @Path("/add/{centreID}/{startTime}/{userID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public FlipFitBooking addBooking(@PathParam("centreID") @NotBlank int centreID, @PathParam("startTime") @NotBlank int startTime){
-        return bookingService.makeBooking(centreID, startTime);
+    public FlipFitBooking addBooking(@PathParam("centreID") @NotBlank int centreID, @PathParam("startTime") @NotBlank int startTime, @PathParam("userID") @NotBlank int userID){
+        return bookingService.makeBooking(userID, centreID, startTime);
     }
     @DELETE
     @Path("/delete/{bookingID}")

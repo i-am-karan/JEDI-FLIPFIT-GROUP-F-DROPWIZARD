@@ -20,7 +20,8 @@ public class BookingsBusiness {
 //        System.out.println("Making a booking for " + userID);
         FlipFitSlotDAOImpl slotDAO=new FlipFitSlotDAOImpl();
         FlipFitSlots slotdetails = slotDAO.getSlotDetails(startTime, centreID);
-        FlipFitGymCustomerBusiness flipFitGymCustomerBusiness = new FlipFitGymCustomerBusiness();
+        FlipFitGymCustomerDAOImpl FFGymCustomer = new FlipFitGymCustomerDAOImpl();
+        FlipFitGymCustomerBusiness flipFitGymCustomerBusiness = new FlipFitGymCustomerBusiness(FFGymCustomer);
         if(slotdetails.getSeatsAvailable() > 0) {
             FlipFitBooking booking = flipFitGymCustomerBusiness.checkBookingConflicts(userID, startTime);
             if(booking != null) {
