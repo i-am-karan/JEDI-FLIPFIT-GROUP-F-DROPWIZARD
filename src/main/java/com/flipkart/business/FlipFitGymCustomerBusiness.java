@@ -30,10 +30,9 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
     }
 
     @Override
-    public boolean checkBookingConflicts(int userId, int slotTime) {
+    public FlipFitBooking checkBookingConflicts(int userId, int slotTime) {
         System.out.println("Checking conflict for slot " + slotTime);
-        flipFitGymCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
-        return true;
+        return flipFitGymCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
     }
     @Override
     public List<FlipFitGymCentre> viewCentres() {

@@ -50,7 +50,7 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
         }
 
     @Override
-    public void makeBooking(FlipFitBooking booking) {
+    public FlipFitBooking makeBooking(FlipFitBooking booking) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -69,7 +69,7 @@ public class FlipFitBookingDAOImpl implements IFlipFitBookingDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        return booking;
     }
 
     @Override

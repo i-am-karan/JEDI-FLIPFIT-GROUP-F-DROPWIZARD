@@ -3,6 +3,6 @@ package com.flipkart.business.interfaces;
 import com.flipkart.model.FlipFitBooking;
 
 public interface IFlipFitBookings{
-    public FlipFitBooking makeBooking(int centreID, int startTime);
+    public FlipFitBooking makeBooking(int userID, int centreID, int startTime);
     public boolean deleteBooking(int bookingId);
 }

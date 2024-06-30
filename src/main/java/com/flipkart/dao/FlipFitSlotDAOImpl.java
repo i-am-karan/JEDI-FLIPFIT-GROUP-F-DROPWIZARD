@@ -17,7 +17,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         FlipFitSlots newSlot = new FlipFitSlots();
         newSlot.setSlotId(1);
         newSlot.setCentreId(101);
-        newSlot.setSlotTime(System.currentTimeMillis());
+        newSlot.setSlotTime(8);
         newSlot.setSeatsAvailable(50);
 
         System.out.println("Adding a new slot:");
@@ -35,7 +35,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         FlipFitSlots slotToUpdate = new FlipFitSlots();
         slotToUpdate.setSlotId(1);
         slotToUpdate.setCentreId(102);
-        slotToUpdate.setSlotTime(System.currentTimeMillis() + 3600000);
+        slotToUpdate.setSlotTime(8);
         slotToUpdate.setSeatsAvailable(45);
 
         System.out.println("\nUpdating slot with ID: " + slotToUpdate.getSlotId());
@@ -48,12 +48,10 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         System.out.println("Slot deleted: " + isDeleted);
 
         int slotIdToGet = 1;
+        int centreIdToRetrieve = 103;
         System.out.println("\nGet slot details for slot ID: " + slotIdToGet);
-        List<FlipFitSlots> slotDetails = slotDAO.getSlotDetails(slotIdToGet);
-        for (FlipFitSlots slot : slotDetails) {
-            System.out.println("Slot ID: " + slot.getSlotId() + ", Center ID: " + slot.getCentreId() +
-                    ", Slot Time: " + slot.getSlotTime() + ", Seats Available: " + slot.getSeatsAvailable());
-        }
+        FlipFitSlots slot = slotDAO.getSlotDetails(slotIdToGet, centreIdToRetrieve);
+
     }
 
 
@@ -175,23 +173,28 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
     }
 
     @Override
-    public List<FlipFitSlots> getSlotDetails(int slotId) {
+    public FlipFitSlots getSlotDetails(int startTime, int centreID) {
         FlipFitSlots slot = null;
         try {
             Connection con = GetConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE slotId = ?");
-            stmt.setInt(1, slotId);
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slot WHERE startTime = ? AND centerId = ?");
+            stmt.setLong(1, startTime);
+            stmt.setLong(2, centreID);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 int slotid = rs.getInt("slotID");
                 int centreId = rs.getInt("centreID");
-                long StartTime = rs.getLong("startTime");
+                int StartTime = rs.getInt("startTime");
                 int SeatsAvailable = rs.getInt("seatsAvailable");
 
                 slot = new FlipFitSlots();
+                slot.setSlotId(slotid);
+                slot.setSlotTime(StartTime);
+                slot.setSeatsAvailable(SeatsAvailable);
+                slot.setCentreId(centreId);
             }
 
             rs.close();
@@ -201,6 +204,6 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         } catch (SQLException e) {
             System.out.println("Error retrieving slot details by ID: " + e.getMessage());
         }
-        return Collections.singletonList(slot);
+        return slot;
     }
 }

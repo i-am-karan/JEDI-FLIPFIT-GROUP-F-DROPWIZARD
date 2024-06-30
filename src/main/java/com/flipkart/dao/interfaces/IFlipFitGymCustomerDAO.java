@@ -1,15 +1,12 @@
 package com.flipkart.dao.interfaces;
 
-import com.flipkart.model.FlipFitGymCentre;
-import com.flipkart.model.FlipFitGymCustomer;
-import com.flipkart.model.FlipFitSlots;
-import com.flipkart.model.FlipFitUser;
+import com.flipkart.model.*;
 
 import java.util.List;
 
 public interface IFlipFitGymCustomerDAO {
     public List<FlipFitSlots> viewBookedSlots(int userID);
-    public boolean checkBookingConflicts(int userId, int slotTime);
+    public FlipFitBooking checkBookingConflicts(int userId, int slotTime);
     public List<FlipFitGymCentre> viewCentres();
     public boolean makePayment(int userID);
     public void viewPaymentDetails(int userID);
