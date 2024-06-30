@@ -1,21 +1,14 @@
 package com.flipkart.business;
-
-import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
-import com.flipkart.model.FlipFitGymCentre;
 import com.flipkart.model.FlipFitGymCentre;
 import com.flipkart.model.FlipFitSlots;
 import com.flipkart.business.interfaces.IFlipFitGymCentre;
 import com.flipkart.dao.FlipFitGymCentreDAOImpl;
-import com.flipkart.dao.interfaces.IFlipFitGymCentreDAO;
-import com.flipkart.dao.FlipFitGymCentreDAOImpl;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitGymCentreBusiness implements IFlipFitGymCentre {
-    private final IFlipFitGymCentreDAO gymCentreDAO ;
+    private final FlipFitGymCentreDAOImpl gymCentreDAO ;
     public FlipFitGymCentreBusiness(FlipFitGymCentreDAOImpl FFCentre){
-        this.gymCentreDAO= (IFlipFitGymCentreDAO) FFCentre;
+        this.gymCentreDAO= FFCentre;
     }
 
     public FlipFitGymCentre updateGymCentre(FlipFitGymCentre flipFitGymCentre){

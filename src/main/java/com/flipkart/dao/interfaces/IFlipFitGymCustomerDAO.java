@@ -11,6 +11,7 @@ public interface IFlipFitGymCustomerDAO {
     public boolean makePayment(int userID);
     public void viewPaymentDetails(int userID);
     public void editPaymentDetails(int userID);
+    public FlipFitUser addUser(FlipFitUser user);
     public FlipFitGymCustomer editDetails(FlipFitGymCustomer customer);
     public FlipFitGymCustomer addCustomer(FlipFitGymCustomer customer, FlipFitUser user);
 }
