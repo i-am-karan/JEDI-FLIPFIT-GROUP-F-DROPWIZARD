@@ -10,7 +10,7 @@ import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
 
 public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
-    private final IFlipFitGymCustomerDAO flipFitGymCustomerDAOImpl ;
+    private final FlipFitGymCustomerDAOImpl flipFitGymCustomerDAOImpl ;
     public FlipFitGymCustomerBusiness(FlipFitGymCustomerDAOImpl FFGymCustomer){
         this.flipFitGymCustomerDAOImpl=FFGymCustomer;
     }

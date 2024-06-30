@@ -113,11 +113,19 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
             stmt.setString(3, user.getEmailID());
             stmt.setString(4, user.getPhoneNumber());
             stmt.setString(5, user.getPassword());
-            ResultSet rs = stmt.executeQuery();
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
 
-            int userID = generatedKeys.getInt(1);
-            user.setUserID(userID);
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int userID = generatedKeys.getInt(1);
+                    user.setUserID(userID);
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -134,11 +142,14 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
             stmt.setString(3, owner.getAadharNumber());
             stmt.setString(4, owner.getGSTNum());
             stmt.setBoolean(5, true);
-            ResultSet rs = stmt.executeQuery();
-            owner.setUserId(user.getUserID());
+            int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
+            if (affectedRows == 0) {
+                throw new SQLException("Creating customer failed, no rows affected.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        owner.setUserId(user.getUserID());
         return owner;
     }
 
