@@ -144,7 +144,7 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
             stmt.setBoolean(5, true);
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
             if (affectedRows == 0) {
-                throw new SQLException("Creating customer failed, no rows affected.");
+                throw new SQLException("Creating owner failed, no rows affected.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
