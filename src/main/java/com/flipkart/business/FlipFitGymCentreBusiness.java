@@ -1,37 +1,31 @@
 package com.flipkart.business;
 
+import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
+import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 import com.flipkart.model.FlipFitGymCentre;
 import com.flipkart.model.FlipFitGymCentre;
 import com.flipkart.model.FlipFitSlots;
 import com.flipkart.business.interfaces.IFlipFitGymCentre;
 import com.flipkart.dao.FlipFitGymCentreDAOImpl;
-
+import com.flipkart.dao.interfaces.IFlipFitGymCentreDAO;
+import com.flipkart.dao.FlipFitGymCentreDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitGymCentreBusiness implements IFlipFitGymCentre {
-    List<FlipFitGymCentre> gymCentreList = new ArrayList<FlipFitGymCentre>();
-
-    public void createGymCentre(){
-        System.out.println("Creating Gym Centre:> ");
-        FlipFitGymCentreDAOImpl gymCentreDAO = new FlipFitGymCentreDAOImpl();
-
-        FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
-
-        gymCentreDAO.createGymCentre(flipFitGymCentre);
+    private final IFlipFitGymCentreDAO gymCentreDAO ;
+    public FlipFitGymCentreBusiness(FlipFitGymCentreDAOImpl FFCentre){
+        this.gymCentreDAO= (IFlipFitGymCentreDAO) FFCentre;
     }
 
-    public boolean updateGymCentre(){
+    public FlipFitGymCentre updateGymCentre(FlipFitGymCentre flipFitGymCentre){
         System.out.println("Updating Gym Centre:> ");
-        FlipFitGymCentreDAOImpl gymCentreDAO = new FlipFitGymCentreDAOImpl();
-        FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
         gymCentreDAO.updateGymCentre(flipFitGymCentre);
-        return true;
+        return flipFitGymCentre;
     }
 
     public boolean deleteGymCentre(int centreId){
         System.out.println("Deleting Gym Centre:> ");
-        FlipFitGymCentreDAOImpl gymCentreDAO = new FlipFitGymCentreDAOImpl();
         FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
         gymCentreDAO.deleteGymCentre(flipFitGymCentre);
         return true;
@@ -39,7 +33,6 @@ public class FlipFitGymCentreBusiness implements IFlipFitGymCentre {
 
     public List<FlipFitSlots> viewAvailableSlots(int centreId) {
         System.out.println("Viewing Available Slots:> ");
-        FlipFitGymCentreDAOImpl gymCentreDAO = new FlipFitGymCentreDAOImpl();
 
         FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
         flipFitGymCentre.setCentreID(centreId);

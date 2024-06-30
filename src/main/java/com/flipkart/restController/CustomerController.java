@@ -34,7 +34,7 @@ public class CustomerController {
     public CustomerController(FlipFitGymCustomerBusiness flipFitGymCustomerService) {
         this.flipFitCustomerBusiness = flipFitGymCustomerService;
     }
-    @GET
+    @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public FlipFitGymCustomer login(FlipFitUser user){

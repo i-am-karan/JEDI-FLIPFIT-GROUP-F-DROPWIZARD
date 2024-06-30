@@ -1,36 +1,36 @@
 package com.flipkart.business;
 
 import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
-import com.flipkart.model.FlipFitGymOwner;
+import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
+import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
+import com.flipkart.dao.FlipFitUserDAOImpl;
+import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
+import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
 import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
-import com.flipkart.model.FlipFitUser;
-
+import com.flipkart.business.FlipFitAdminBusiness;
+import java.util.List;
 import java.util.Scanner;
 
 public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
-    Scanner scanner = new Scanner(System.in);
-    public boolean addCentre() {
-        System.out.println("Give the following details:");
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-        System.out.print("City: ");
-        String city = scanner.nextLine();
-        System.out.print("Address: ");
-        String address = scanner.nextLine();
-        System.out.println("Centre added:> with name " + name + " and city " + city + " and address " + address);
-
-        return true;
+    private final IFlipFitGymOwnerDAO flipFitGymOwnerDAO ;
+    public FlipFitGymOwnerBusiness(FlipFitGymOwnerDAOImpl FFOwner){
+        this.flipFitGymOwnerDAO= FFOwner;
     }
 
-    public void viewCentres() {
+    public FlipFitGymCentre addCentre(FlipFitGymCentre flipFitGymCentre){
+        return flipFitGymOwnerDAO.addCentre(flipFitGymCentre);
+    }
+
+    public List<FlipFitGymCentre> viewCentres() {
         System.out.println("Centres listed:> ");
+        return null;
     }
-    public void viewFlipFitCustomers() {
+    public List<FlipFitGymCustomer> viewFlipFitCustomers() {
         System.out.println("Flip fit customers:> ");
     }
-    public void viewPayments() {
+    public List<FlipFitPayments> viewPayments() {
         System.out.println("Payments listed:> ");
     }
     public boolean editDetails() throws InvalidChoiceException {
@@ -89,39 +89,22 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
             return false;
         }
     }
+    public FlipFitGymOwner registerOwner(FlipFitGymOwner GymOwner) {
 
-    public void registerOwner(){
-        Scanner sc=new Scanner(System.in);
         FlipFitUser user = new FlipFitUser();
-        System.out.println("Enter Name : ");
-        String Name = sc.next();
-        user.setUserName(Name);
-        System.out.println("Enter Phone Number : ");
-        String PhoneNumber = sc.next();
-        user.setPhoneNumber(PhoneNumber);
-        System.out.println("Enter Email : ");
-        String Email = sc.next();
-        user.setEmailID(Email);
-        System.out.println("Enter Password : ");
-        String Password = sc.next();
-        user.setPassword(Password);
-
-        FlipFitGymOwner owner = new FlipFitGymOwner();
-        System.out.println("Enter panID : ");
-        String panID = sc.next();
-        owner.setPanId(panID);
-
-        System.out.println("Enter Aadhar Number : ");
-        String aadharNumber = sc.next();
-        owner.setAadharNumber(aadharNumber);
-
-        System.out.println("Enter GST Number : ");
-        String gstNumber = sc.next();
-        owner.setGSTIN(gstNumber);
-
-        FlipFitGymOwnerDAOImpl flipFitGymOwnerDAO = new FlipFitGymOwnerDAOImpl();
+        user.setPassword(GymOwner.getPassword());
+        user.setEmailID(GymOwner.getEmailID());
+        user.setPhoneNumber(GymOwner.getPhoneNumber());
+        user.setUserName(GymOwner.getUserName());
+        user.setRoleID(1);
         flipFitGymOwnerDAO.addUser(user);
-        flipFitGymOwnerDAO.addGymOwner(owner,user);
-
+        return flipFitGymOwnerDAO.addGymOwner(GymOwner, user);
+    }
+    @Override
+    public FlipFitUser login(FlipFitUser flipFitUser) {
+        FlipFitUserDAOImpl userDAO = new FlipFitUserDAOImpl();
+        flipFitUser.setRoleID(2);
+        userDAO.login(flipFitUser.getEmailID(), flipFitUser.getPassword());
+        return flipFitUser;
     }
 }

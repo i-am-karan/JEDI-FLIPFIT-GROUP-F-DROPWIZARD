@@ -10,11 +10,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.flipkart.model.FlipFitUser;
-
+import com.flipkart.model.FlipFitGymCentre;
 public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
     Random rand = new Random();
     @Override
-    public boolean addCentre(FlipFitGymCentre centre) {
+    public FlipFitGymCentre addCentre(FlipFitGymCentre centre) {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -39,9 +39,8 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
         }
-        return true;
+        return centre;
     }
 
     @Override
