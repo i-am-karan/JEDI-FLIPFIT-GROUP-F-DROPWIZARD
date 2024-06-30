@@ -182,7 +182,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
         try {
             Connection con = GetConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slots WHERE startTime = ? AND centerId = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Slots WHERE slotTime = ? AND centreID = ?");
             stmt.setLong(1, startTime);
             stmt.setLong(2, centreID);
 
@@ -191,7 +191,7 @@ public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
             if (rs.next()) {
                 int slotid = rs.getInt("slotID");
                 int centreId = rs.getInt("centreID");
-                int StartTime = rs.getInt("startTime");
+                int StartTime = rs.getInt("slotTime");
                 int SeatsAvailable = rs.getInt("seatsAvailable");
 
                 slot = new FlipFitSlots();
