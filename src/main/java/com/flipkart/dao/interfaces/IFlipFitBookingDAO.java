@@ -12,5 +12,4 @@ public interface IFlipFitBookingDAO {
     boolean deleteBooking(int bookingId);
     public List<FlipFitBooking> getAllBookings(int userId);
     public List<FlipFitBooking> getBookingDetails(int bookingId);
-    public List<FlipFitBooking> bookings = new ArrayList<>();
 }

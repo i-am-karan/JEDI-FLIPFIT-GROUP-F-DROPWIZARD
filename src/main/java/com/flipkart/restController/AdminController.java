@@ -2,7 +2,6 @@ package com.flipkart.restController;
 
 import com.flipkart.business.FlipFitAdminBusiness;
 import com.flipkart.business.interfaces.IFlipFitAdmin;
-import com.flipkart.dao.FlipFitAdminDAOImpl;
 import com.flipkart.model.*;
 
 import javax.inject.Inject;

@@ -1,9 +1,5 @@
 package com.flipkart.restController;
-
-import com.flipkart.business.FlipFitAdminBusiness;
 import com.flipkart.business.FlipFitGymCustomerBusiness;
-import com.flipkart.business.interfaces.IFlipFitAdmin;
-import com.flipkart.dao.FlipFitAdminDAOImpl;
 import com.flipkart.exceptions.InvalidChoiceException;
 import com.flipkart.model.FlipFitBooking;
 import com.flipkart.model.FlipFitGymCentre;
@@ -12,8 +8,6 @@ import  com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import com.flipkart.model.FlipFitUser;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
