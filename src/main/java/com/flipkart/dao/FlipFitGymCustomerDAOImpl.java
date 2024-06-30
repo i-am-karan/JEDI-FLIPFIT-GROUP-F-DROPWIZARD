@@ -148,6 +148,7 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        customer.setUserId(user.getUserID());
         return customer;
     }
 }
