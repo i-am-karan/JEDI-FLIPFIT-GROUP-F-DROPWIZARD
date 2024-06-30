@@ -19,6 +19,7 @@ com/flipkart/business/interfaces/IFlipFitAdmin.class
 com/flipkart/model/FlipFitGymCentre.class
 com/flipkart/model/AbstractUser.class
 com/flipkart/business/interfaces/IFlipFitSlots.class
+com/flipkart/restController/OwnerController.class
 com/flipkart/app/FlipFitApplication.class
 com/flipkart/dao/FlipFitAdminDAOImpl.class
 com/flipkart/dao/GetConnection.class
@@ -29,10 +30,12 @@ com/flipkart/constant/DBConstants.class
 com/flipkart/model/FlipFitAdmin.class
 com/flipkart/business/FlipFitSlotsBusiness.class
 com/flipkart/exceptions/ExceptionHandler.class
+com/flipkart/restController/GymController.class
 com/flipkart/business/FlipFitGymCentreBusiness.class
 com/flipkart/model/FlipFitGymCustomer.class
 com/flipkart/business/interfaces/IFlipFitGymCustomer.class
 com/flipkart/dao/interfaces/IFlipFitBookingDAO.class
+com/flipkart/restController/BookingController.class
 com/flipkart/business/FlipFitGymOwnerBusiness.class
 com/flipkart/exceptions/InvalidChoiceException.class
 com/flipkart/dao/interfaces/IFlipFitPaymentsDAO.class

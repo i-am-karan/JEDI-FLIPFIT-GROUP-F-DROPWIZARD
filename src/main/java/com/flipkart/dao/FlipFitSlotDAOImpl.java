@@ -11,48 +11,48 @@ import java.util.Collections;
 import java.util.List;
 
 public class FlipFitSlotDAOImpl implements IFlipFitSlotDAO {
-    public static void main(String[] args) {
-        IFlipFitSlotDAO slotDAO = new FlipFitSlotDAOImpl();
-
-        FlipFitSlots newSlot = new FlipFitSlots();
-        newSlot.setSlotId(1);
-        newSlot.setCentreId(101);
-        newSlot.setSlotTime(8);
-        newSlot.setSeatsAvailable(50);
-
-        System.out.println("Adding a new slot:");
-        boolean isAdded = slotDAO.addSlot(newSlot);
-        System.out.println("Slot added: " + isAdded);
-
-        int centerIdToRetrieve = 101;
-        System.out.println("\nRetrieving all slots for center ID: " + centerIdToRetrieve);
-        List<FlipFitSlots> slots = slotDAO.getAllSlots(centerIdToRetrieve);
-        for (FlipFitSlots slot : slots) {
-            System.out.println("Slot ID: " + slot.getSlotId() + ", Center ID: " + slot.getCentreId() +
-                    ", Slot Time: " + slot.getSlotTime() + ", Seats Available: " + slot.getSeatsAvailable());
-        }
-
-        FlipFitSlots slotToUpdate = new FlipFitSlots();
-        slotToUpdate.setSlotId(1);
-        slotToUpdate.setCentreId(102);
-        slotToUpdate.setSlotTime(8);
-        slotToUpdate.setSeatsAvailable(45);
-
-        System.out.println("\nUpdating slot with ID: " + slotToUpdate.getSlotId());
-        boolean isUpdated = slotDAO.changeSlot(slotToUpdate);
-        System.out.println("Slot updated: " + isUpdated);
-
-        int slotIdToDelete = 1;
-        System.out.println("\nDeleting slot with ID: " + slotIdToDelete);
-        boolean isDeleted = slotDAO.deleteSlot(slotIdToDelete);
-        System.out.println("Slot deleted: " + isDeleted);
-
-        int slotIdToGet = 1;
-        int centreIdToRetrieve = 103;
-        System.out.println("\nGet slot details for slot ID: " + slotIdToGet);
-        FlipFitSlots slot = slotDAO.getSlotDetails(slotIdToGet, centreIdToRetrieve);
-
-    }
+//    public static void main(String[] args) {
+//        IFlipFitSlotDAO slotDAO = new FlipFitSlotDAOImpl();
+//
+//        FlipFitSlots newSlot = new FlipFitSlots();
+//        newSlot.setSlotId(1);
+//        newSlot.setCentreId(101);
+//        newSlot.setSlotTime(8);
+//        newSlot.setSeatsAvailable(50);
+//
+//        System.out.println("Adding a new slot:");
+//        boolean isAdded = slotDAO.addSlot(newSlot);
+//        System.out.println("Slot added: " + isAdded);
+//
+//        int centerIdToRetrieve = 101;
+//        System.out.println("\nRetrieving all slots for center ID: " + centerIdToRetrieve);
+//        List<FlipFitSlots> slots = slotDAO.getAllSlots(centerIdToRetrieve);
+//        for (FlipFitSlots slot : slots) {
+//            System.out.println("Slot ID: " + slot.getSlotId() + ", Center ID: " + slot.getCentreId() +
+//                    ", Slot Time: " + slot.getSlotTime() + ", Seats Available: " + slot.getSeatsAvailable());
+//        }
+//
+//        FlipFitSlots slotToUpdate = new FlipFitSlots();
+//        slotToUpdate.setSlotId(1);
+//        slotToUpdate.setCentreId(102);
+//        slotToUpdate.setSlotTime(8);
+//        slotToUpdate.setSeatsAvailable(45);
+//
+//        System.out.println("\nUpdating slot with ID: " + slotToUpdate.getSlotId());
+//        boolean isUpdated = slotDAO.changeSlot(slotToUpdate);
+//        System.out.println("Slot updated: " + isUpdated);
+//
+//        int slotIdToDelete = 1;
+//        System.out.println("\nDeleting slot with ID: " + slotIdToDelete);
+//        boolean isDeleted = slotDAO.deleteSlot(slotIdToDelete);
+//        System.out.println("Slot deleted: " + isDeleted);
+//
+//        int slotIdToGet = 1;
+//        int centreIdToRetrieve = 103;
+//        System.out.println("\nGet slot details for slot ID: " + slotIdToGet);
+//        FlipFitSlots slot = slotDAO.getSlotDetails(slotIdToGet, centreIdToRetrieve);
+//
+//    }
 
 
     @Override

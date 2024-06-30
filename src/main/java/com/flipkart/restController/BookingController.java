@@ -27,11 +27,11 @@ import com.flipkart.business.interfaces.IFlipFitBookings;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class BookingController {
-    private final IFlipFitBookings bookingService;
+    private final BookingsBusiness bookingService;
 
     @Inject
     public BookingController(BookingsBusiness bookingsService) {
-        this.bookingService = (IFlipFitBookings) bookingsService;
+        this.bookingService =  bookingsService;
     }
     @POST
     @Path("/add/{centreID}/{startTime}/{userID}")

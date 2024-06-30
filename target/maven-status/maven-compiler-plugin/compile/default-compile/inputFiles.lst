@@ -7,6 +7,7 @@
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/dao/FlipFitUserDAOImpl.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/business/interfaces/IFlipFitGymCentre.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/model/FlipFitBooking.java
+/Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/restController/GymController.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/model/AbstractUser.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/business/FlipFitAdminBusiness.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/business/interfaces/IFlipFitSlots.java
@@ -17,7 +18,9 @@
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/dao/GetConnection.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/utils/DB.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/constant/DBConstants.java
+/Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/restController/OwnerController.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/model/FlipFitPayments.java
+/Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/restController/BookingController.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/dao/interfaces/IFlipFitUserDAO.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/dao/FlipFitGymOwnerDAOImpl.java
 /Users/deependra.singh2/Documents/FlipFitApp/JEDI-FLIPFIT-GROUP-F-DROPWIZARD/src/main/java/com/flipkart/exceptions/ExceptionHandler.java
