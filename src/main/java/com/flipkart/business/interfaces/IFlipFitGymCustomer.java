@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IFlipFitGymCustomer {
     public List<FlipFitBooking> viewBookedSlots(int userId);
-    public boolean checkBookingConflicts(int startTime);
+    public boolean checkBookingConflicts(int userId, int slotTime);
     public List<FlipFitGymCentre> viewCentres();
     public boolean makePayment(int userId);
     public FlipFitGymCustomer editDetails(FlipFitGymCustomer flipFitGymCustomer) throws InvalidChoiceException;

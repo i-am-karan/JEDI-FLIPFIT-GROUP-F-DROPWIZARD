@@ -1,4 +1,7 @@
 package com.flipkart.business;
+import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
+import com.flipkart.dao.interfaces.IFlipFitBookingDAO;
+import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 import com.flipkart.model.FlipFitBooking;
 import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.FlipFitBookingDAOImpl;
@@ -7,12 +10,16 @@ import com.flipkart.dao.FlipFitSlotDAOImpl;
 import java.util.Random;
 
 public class BookingsBusiness {
-    public void makeBooking(int slotId, int userId) {
+    private final IFlipFitBookingDAO bookingDAO ;
+    public BookingsBusiness(FlipFitBookingDAOImpl FFBooking){
+        this.bookingDAO=FFBooking;
+    }
+
+    public FlipFitBooking makeBooking(int centreID, int startTime) {
 
         //TODO:  Check if seat available > 0
         System.out.println("Making a booking for " + userId);
 
-        FlipFitBookingDAOImpl bookingDAO = new FlipFitBookingDAOImpl();
         FlipFitBooking booking = new FlipFitBooking();
         booking.setUserId(new Random().nextInt(100));
         booking.setSlotId(slotId);
@@ -27,6 +34,7 @@ public class BookingsBusiness {
         FlipFitSlots currflipFitSlots = flipFitSlots;
         currflipFitSlots.setSeatsAvailable(flipFitSlots.getSeatsAvailable()-1);
         flipFitSlotsBusiness.updateAvailability(currflipFitSlots);
+        return booking;
     }
 
     public boolean deleteBooking(int bookingId) {

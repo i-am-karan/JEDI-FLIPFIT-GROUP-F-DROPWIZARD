@@ -85,7 +85,7 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
 
 
     @Override
-    public boolean editDetails(FlipFitGymOwner owner) {
+    public FlipFitGymOwner editDetails(FlipFitGymOwner owner) {
         String sql = "UPDATE GymOwner SET PAN=?, Aadhar=? ,GSTIN=? WHERE ownerID=owner.userId";
 
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -93,14 +93,14 @@ public class FlipFitGymOwnerDAOImpl implements IFlipFitGymOwnerDAO {
             stmt.setString(2, owner.getAadharNumber());
             stmt.setString(3,owner.getGSTNum());
             ResultSet rs = stmt.executeQuery();
-            if(rs!=null) {
-                return true;
+            if(rs==null) {
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return owner;
 
     }
 

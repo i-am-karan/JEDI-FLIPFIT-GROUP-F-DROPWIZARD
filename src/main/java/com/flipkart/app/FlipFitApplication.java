@@ -4,10 +4,13 @@ package com.flipkart.app;
  * Hello world!
  *
  */
+import com.flipkart.business.BookingsBusiness;
 import com.flipkart.business.FlipFitAdminBusiness;
 import com.flipkart.business.interfaces.IFlipFitAdmin;
 import com.flipkart.dao.FlipFitAdminDAOImpl;
+import com.flipkart.dao.FlipFitBookingDAOImpl;
 import com.flipkart.restController.AdminController;
+import com.flipkart.restController.BookingController;
 import com.flipkart.restController.CustomerController;
 import com.flipkart.restController.GymController;
 import io.dropwizard.Application;
@@ -36,9 +39,13 @@ public class FlipFitApplication extends Application<Configuration> {
         FlipFitGymCentreDAOImpl flipFitCentreDAO = new FlipFitGymCentreDAOImpl();
         FlipFitGymCentreBusiness flipFitCentre = new FlipFitGymCentreBusiness(flipFitCentreDAO);
 
+        FlipFitBookingDAOImpl flipFitBookingDAO = new FlipFitBookingDAOImpl();
+        BookingsBusiness bookingBusiness = new BookingsBusiness(flipFitBookingDAO);
+
         e.jersey().register(new AdminController(flipFitAdmin));
         e.jersey().register(new CustomerController(flipFitCustomer));
         e.jersey().register(new GymController(flipFitCentre));
+        e.jersey().register(new BookingController(bookingBusiness));
 
         System.out.println("HERE");
     }

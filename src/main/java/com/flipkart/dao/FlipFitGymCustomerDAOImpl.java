@@ -33,11 +33,11 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
     }
 
     @Override
-    public boolean checkBookingConflicts(int userID, int slotID) {
-        String sql = "SELECT * FROM Booking WHERE userID = ? and slotID = ?";
+    public boolean checkBookingConflicts(int userId, int slotTime) {
+        String sql = "SELECT * FROM Booking WHERE userID = ? and slotTime = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setInt(1, userID);
-            stmt.setInt(2, slotID);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, slotTime);
             ResultSet rs = stmt.executeQuery();
             if(rs!=null) {
                 return true; // there is a conflict
@@ -85,7 +85,7 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
     }
 
     @Override
-    public boolean editDetails(FlipFitGymCustomer customer) {
+    public FlipFitGymCustomer editDetails(FlipFitGymCustomer customer) {
         String sql = "UPDATE Customer SET city=?, pincode=? WHERE customerID=?";
 
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -93,8 +93,8 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
             stmt.setString(2, customer.getPinCode());
             stmt.setInt(3,customer.getUserId());
             ResultSet rs = stmt.executeQuery();
-            if(rs!=null) {
-                return true;
+            if(rs==null) {
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,14 +107,14 @@ public class FlipFitGymCustomerDAOImpl implements IFlipFitGymCustomerDAO {
             stmt.setString(2, customer.getPassword());
             stmt.setInt(3,customer.getUserId());
             ResultSet rs = stmt.executeQuery();
-            if(rs!=null) {
-                return true;
+            if(rs==null) {
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return customer;
     }
 
     public FlipFitUser addUser(FlipFitUser user) {
