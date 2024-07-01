@@ -19,7 +19,4 @@ public interface IFlipFitAdminDAO {
 
     public boolean deleteOwner(int ownerId);
 
-    public FlipFitUser addUser(FlipFitUser user);
-
-    public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
 }
