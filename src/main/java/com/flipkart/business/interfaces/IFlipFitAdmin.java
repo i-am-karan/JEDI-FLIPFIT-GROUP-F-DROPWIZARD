@@ -10,6 +10,6 @@ public interface IFlipFitAdmin {
     public List<FlipFitGymOwner> getApprovedOwnerList();
     public List<FlipFitGymCustomer> getUserList();
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId);
-    public boolean validateOwner(FlipFitGymOwner owner, FlipFitUser user);
+    public boolean validateOwner(int ownerId);
     public boolean deleteOwner(int ownerId);
 }

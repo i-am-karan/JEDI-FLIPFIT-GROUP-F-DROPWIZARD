@@ -43,17 +43,11 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
         return true;
     }
     public FlipFitGymCustomer editDetails(FlipFitGymCustomer flipFitGymCustomer) throws InvalidChoiceException{
-        return flipFitGymCustomerDAOImpl.editDetails(flipFitGymCustomer);
+
 //        try
 //        {
-//
-//
-//
-//                default: {
-//                    throw new InvalidChoiceException("Invalid choice entered: " + choice);
-//                }
-//            }
-//            return null;
+            return flipFitGymCustomerDAOImpl.editDetails(flipFitGymCustomer);
+
 //        }
 //        catch (InvalidChoiceException e)
 //        {
