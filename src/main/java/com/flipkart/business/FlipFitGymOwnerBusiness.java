@@ -29,12 +29,8 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         return flipFitGymOwnerDAO.viewCentresByOwnerID(flipFitGymOwner);
     }
 
-    @Override
-    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
-        return List.of();
-    }
-
-    //    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
+//    @Override
+//    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
 //        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
 //    }
     public List<FlipFitPayments> viewPayments() {
