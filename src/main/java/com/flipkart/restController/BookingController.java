@@ -22,7 +22,7 @@ public class BookingController {
         return bookingService.makeBooking(userID, centreID, startTime);
     }
     @DELETE
-    @Path("/delete/{bookingID}")
+    @Path("/delete/bookingID={bookingID}")
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean deleteBooking(@PathParam("bookingID") int bookingID){
         return bookingService.deleteBooking(bookingID);
