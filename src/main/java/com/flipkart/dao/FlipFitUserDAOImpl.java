@@ -47,7 +47,7 @@ public class FlipFitUserDAOImpl implements IFlipFitUserDAO {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * from User where email=? and password=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * from User where emailID=? and password=?");
             stmt.setString(1,emailID);
             stmt.setString(2,password);
             ResultSet rsUser = stmt.executeQuery();
