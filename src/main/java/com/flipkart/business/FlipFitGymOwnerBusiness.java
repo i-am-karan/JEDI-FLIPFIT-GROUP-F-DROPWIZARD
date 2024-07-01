@@ -28,7 +28,13 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         System.out.println("Centres listed:> ");
         return flipFitGymOwnerDAO.viewCentresByOwnerID(flipFitGymOwner);
     }
-//    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
+
+    @Override
+    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
+        return List.of();
+    }
+
+    //    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
 //        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
 //    }
     public List<FlipFitPayments> viewPayments() {
