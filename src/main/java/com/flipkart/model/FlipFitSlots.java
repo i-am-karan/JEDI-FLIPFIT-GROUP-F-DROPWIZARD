@@ -26,7 +26,7 @@ public class FlipFitSlots {
         return slotTime;
     }
 
-    public void setSlotTime(int startTime) {
+    public void setSlotTime(int slotTime) {
         this.slotTime = slotTime;
     }
 

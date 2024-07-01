@@ -56,8 +56,9 @@ public interface IFlipFitGymCustomerDAO {
      It takes customer as parameter andFlipFitGymCustomer object containing updated customer details.
      FlipFitGymCustomer - Returns the updated FlipFitGymCustomer object after changes have been saved.
      */
-    public FlipFitGymCustomer editDetails(FlipFitGymCustomer customer);
 
+    public FlipFitGymCustomer editDetails(FlipFitGymCustomer customer);
+    public FlipFitUser addUser(FlipFitUser user);
     /**
      * addCustomer - It is a method which adds a new customer to the system along with user details.
      It takes customer as parameter and FlipFitGymCustomer object containing the customer's details.

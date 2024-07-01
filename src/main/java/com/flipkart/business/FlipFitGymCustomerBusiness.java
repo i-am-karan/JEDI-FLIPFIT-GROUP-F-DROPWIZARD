@@ -4,15 +4,12 @@ import com.flipkart.dao.interfaces.IFlipFitAdminDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymCustomer;
 import java.util.List;
-import java.util.Scanner;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
-import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
 
 public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
-    private final IFlipFitGymCustomerDAO flipFitGymCustomerDAOImpl ;
-    public FlipFitGymCustomerBusiness(FlipFitGymCustomerDAOImpl FFAdmin){
-        this.flipFitGymCustomerDAOImpl=FFAdmin;
+    private final FlipFitGymCustomerDAOImpl flipFitGymCustomerDAOImpl ;
+    public FlipFitGymCustomerBusiness(FlipFitGymCustomerDAOImpl FFGymCustomer){
+        this.flipFitGymCustomerDAOImpl=FFGymCustomer;
     }
 
     @Override
@@ -46,17 +43,11 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
         return true;
     }
     public FlipFitGymCustomer editDetails(FlipFitGymCustomer flipFitGymCustomer) throws InvalidChoiceException{
-        return flipFitGymCustomerDAOImpl.editDetails(flipFitGymCustomer);
+
 //        try
 //        {
-//
-//
-//
-//                default: {
-//                    throw new InvalidChoiceException("Invalid choice entered: " + choice);
-//                }
-//            }
-//            return null;
+            return flipFitGymCustomerDAOImpl.editDetails(flipFitGymCustomer);
+
 //        }
 //        catch (InvalidChoiceException e)
 //        {
@@ -68,13 +59,14 @@ public class FlipFitGymCustomerBusiness implements IFlipFitGymCustomer {
     @Override
     public FlipFitGymCustomer registerCustomer(FlipFitGymCustomer flipFitGymCustomer) {
 
-        FlipFitGymCustomerDAOImpl flipFitGymCustomerDAO = new FlipFitGymCustomerDAOImpl();
         FlipFitUser flipFitUser = new FlipFitUser();
         flipFitUser.setPassword(flipFitGymCustomer.getPassword());
         flipFitUser.setEmailID(flipFitGymCustomer.getEmailID());
         flipFitUser.setPhoneNumber(flipFitGymCustomer.getPhoneNumber());
         flipFitUser.setUserName(flipFitGymCustomer.getUserName());
         flipFitUser.setRoleID(1);
+        flipFitGymCustomer.setRole(1);
+        flipFitGymCustomerDAOImpl.addUser(flipFitUser);
         return flipFitGymCustomerDAOImpl.addCustomer(flipFitGymCustomer, flipFitUser);
     }
     @Override

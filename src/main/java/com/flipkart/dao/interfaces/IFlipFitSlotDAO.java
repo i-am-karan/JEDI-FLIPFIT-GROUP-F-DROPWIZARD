@@ -2,7 +2,6 @@ package com.flipkart.dao.interfaces;
 
 import com.flipkart.model.FlipFitSlots;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,7 +17,7 @@ public interface IFlipFitSlotDAO {
      boolean - It returns a boolean as true or false which indicates if the deletion was successful or not.
      if successful - true, if not successful - false
      */
-    public boolean addSlot(FlipFitSlots slot);
+    public FlipFitSlots addSlot(FlipFitSlots slot);
 
     /**
      * deleteSlot - It is a method which Deletes an existing slot based on the provided slot ID.
@@ -26,6 +25,7 @@ public interface IFlipFitSlotDAO {
      boolean - It returns a boolean as true or false which indicates if the deletion was successful or not.
      if successful - true, if not successful - false
      */
+
     public boolean deleteSlot(int slotId);
 
     /**
@@ -42,12 +42,13 @@ public interface IFlipFitSlotDAO {
      List<FlipFitSlots> - Returns a list of FlipFitSlots objects associated with the given slot type ID.
      */
     public List<FlipFitSlots> getAllSlots(int slotID);
-
+    public List<FlipFitSlots> getAllSlots(int centreID);
     /**
      getSlotDetailsById - It is a method which Retrieves detailed information about a specific slot by its ID.
      It takes slotId as parameter and ID of the slot to get details for.
      FlipFitSlots - Returns the FlipFitSlots object containing the detailed information of the slot.
      */
+
     public FlipFitSlots getSlotDetailsById(int slotId);
 
     /**

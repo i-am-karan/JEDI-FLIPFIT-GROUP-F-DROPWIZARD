@@ -1,19 +1,9 @@
 package com.flipkart.restController;
-
-import com.flipkart.business.FlipFitAdminBusiness;
-import com.flipkart.business.FlipFitGymCustomerBusiness;
-import com.flipkart.business.interfaces.IFlipFitAdmin;
-import com.flipkart.dao.FlipFitAdminDAOImpl;
 import com.flipkart.exceptions.InvalidChoiceException;
 import com.flipkart.model.*;
-import  com.flipkart.business.interfaces.IFlipFitGymCustomer;
-
 import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
 import com.flipkart.business.FlipFitGymOwnerBusiness;
@@ -44,34 +34,41 @@ public class OwnerController {
         return owner;
     }
 
-    @PUT
+    @POST
     @Path("/addCentre")
     @Consumes(MediaType.APPLICATION_JSON)
     public FlipFitGymCentre addGymCentre(FlipFitGymCentre flipFitGymCentre) throws InvalidChoiceException{
+//        flipFitGymCentre.setOwnerID(flipFitOwner.getUserId());
         return flipFitGymOwnerBusiness.addCentre(flipFitGymCentre) ;
     }
+
+    @POST
+    @Path("/addSlot")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public FlipFitSlots addSlot(FlipFitSlots flipFitSlot) throws InvalidChoiceException{
+//        flipFitGymCentre.setOwnerID(flipFitOwner.getUserId());
+        return flipFitGymOwnerBusiness.addSlot(flipFitSlot) ;
+    }
+
     @GET
     @Path("/viewCentres")
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<FlipFitGymCentre> viewCentres(){
-        return flipFitGymOwnerBusiness.viewCentres(flipFitOwner);
+    public List<FlipFitGymCentre> viewCentres(FlipFitGymOwner owner){
+        return flipFitGymOwnerBusiness.viewCentres(owner);
     }
-    @GET
-    @Path("/viewCustomers/{centreID}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public List<FlipFitUser> viewFlipFitCustomers(@PathParam("centreID") @NotBlank int centreID){
-        FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
-        flipFitGymCentre.setCentreID(centreID);
-        return flipFitGymOwnerBusiness.viewFlipFitCustomers(flipFitGymCentre);
-    }
+//    @GET
+//    @Path("/viewCustomers/{centreID}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public List<FlipFitUser> viewFlipFitCustomers(@PathParam("centreID") int centreID){
+//        System.out.println("centreID: " + centreID);
+//        FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
+//        flipFitGymCentre.setCentreID(centreID);
+//        return flipFitGymOwnerBusiness.viewFlipFitCustomers(flipFitGymCentre);
+//    }
     @PUT
     @Path("/editDetails")
     @Consumes(MediaType.APPLICATION_JSON)
     public FlipFitGymOwner editDetails(FlipFitGymOwner flipFitGymOwner) throws InvalidChoiceException{
         return flipFitGymOwnerBusiness.editDetails(flipFitGymOwner);
     }
-
-
-
-
 }

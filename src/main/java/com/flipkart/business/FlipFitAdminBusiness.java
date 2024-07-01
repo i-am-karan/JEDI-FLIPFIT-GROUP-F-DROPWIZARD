@@ -1,5 +1,4 @@
 package com.flipkart.business;
-
 import com.flipkart.dao.interfaces.IFlipFitAdminDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitAdmin;
@@ -29,14 +28,8 @@ public class FlipFitAdminBusiness implements IFlipFitAdmin {
         System.out.println("AdminUserBusiness.getUserList");
         return flipFitAdminDAOImpl.getUserList();
     }
-    public boolean validateOwner(FlipFitGymOwner owner, FlipFitUser user){
-
-        if (flipFitAdminDAOImpl.validateOwner(owner.getUserId())){
-            flipFitAdminDAOImpl.addGymOwner(owner, user);
-            flipFitAdminDAOImpl.addUser(user);
-            return true;
-        }
-        return false;
+    public boolean validateOwner(int ownerId){
+        return flipFitAdminDAOImpl.validateOwner(ownerId);
     }
     public boolean deleteOwner(int ownerId){
         System.out.println("AdminUserBusiness.deleteOwner" + ownerId);

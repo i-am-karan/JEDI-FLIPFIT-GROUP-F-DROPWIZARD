@@ -57,6 +57,7 @@ public interface IFlipFitAdminDAO {
      */
     public boolean deleteOwner(int ownerId);
 
+
     /**
      addUser - It is a method which adds a new user to the system.
      It takes user as parameter and FlipFitUser object containing the user's details.
@@ -71,4 +72,5 @@ public interface IFlipFitAdminDAO {
      FlipFitGymOwner - Returns the FlipFitGymOwner object after it has been added to the system.
      */
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
+
 }

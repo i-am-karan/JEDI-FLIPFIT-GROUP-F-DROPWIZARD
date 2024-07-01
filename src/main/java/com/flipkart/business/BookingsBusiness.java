@@ -1,13 +1,10 @@
 package com.flipkart.business;
 import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
 import com.flipkart.dao.interfaces.IFlipFitBookingDAO;
-import com.flipkart.dao.interfaces.IFlipFitGymCustomerDAO;
 import com.flipkart.model.FlipFitBooking;
 import com.flipkart.model.FlipFitSlots;
 import com.flipkart.dao.FlipFitBookingDAOImpl;
 import com.flipkart.dao.FlipFitSlotDAOImpl;
-import com.flipkart.business.FlipFitGymCustomerBusiness;
-import java.util.Random;
 
 public class BookingsBusiness {
     private final IFlipFitBookingDAO bookingDAO ;
@@ -20,8 +17,10 @@ public class BookingsBusiness {
 //        System.out.println("Making a booking for " + userID);
         FlipFitSlotDAOImpl slotDAO=new FlipFitSlotDAOImpl();
         FlipFitSlots slotdetails = slotDAO.getSlotDetails(startTime, centreID);
-        FlipFitGymCustomerBusiness flipFitGymCustomerBusiness = new FlipFitGymCustomerBusiness();
-        if(slotdetails.getSeatsAvailable() > 0) {
+
+        FlipFitGymCustomerDAOImpl FFGymCustomer = new FlipFitGymCustomerDAOImpl();
+        FlipFitGymCustomerBusiness flipFitGymCustomerBusiness = new FlipFitGymCustomerBusiness(FFGymCustomer);
+        if(slotdetails!=null && slotdetails.getSeatsAvailable() > 0) {
             FlipFitBooking booking = flipFitGymCustomerBusiness.checkBookingConflicts(userID, startTime);
             if(booking != null) {
                 deleteBooking(booking.getBookingId());
@@ -35,11 +34,13 @@ public class BookingsBusiness {
             bookingDAO.makeBooking(booking);
 //            System.out.println("Booking completed");
 
-            FlipFitSlots currflipFitSlots = slotdetails;
-            currflipFitSlots.setSeatsAvailable(currflipFitSlots.getSeatsAvailable() - 1);
-            FlipFitSlotsBusiness flipFitSlotsBusiness = new FlipFitSlotsBusiness();
+//            FlipFitSlots currflipFitSlots = slotdetails;
 
-            flipFitSlotsBusiness.updateAvailability(currflipFitSlots);
+            int seatsAvailable = slotdetails.getSeatsAvailable();
+            slotdetails.setSeatsAvailable(seatsAvailable - 1);
+
+            FlipFitSlotsBusiness flipFitSlotsBusiness = new FlipFitSlotsBusiness();
+            flipFitSlotsBusiness.updateAvailability(slotdetails);
             return booking;
         }
         return null;
@@ -49,14 +50,20 @@ public class BookingsBusiness {
 //        System.out.println("Deleting a booking for " + bookingId);
         FlipFitBookingDAOImpl bookingDAO = new FlipFitBookingDAOImpl();
         FlipFitBooking bookingDetails = bookingDAO.getBookingDetailsByBookingId(bookingId);
-
+        if(bookingDetails==null) {
+            return false;
+        }
         int slotId = bookingDetails.getSlotId();
-        FlipFitSlotsBusiness flipFitSlotsBusiness = new FlipFitSlotsBusiness();
         FlipFitSlotDAOImpl flipFitSlotDAO = new FlipFitSlotDAOImpl();
         FlipFitSlots flipFitSlots = flipFitSlotDAO.getSlotDetailsById(slotId);
-        FlipFitSlots currflipFitSlots = flipFitSlots;
-        currflipFitSlots.setSeatsAvailable(flipFitSlots.getSeatsAvailable()+1);
-        flipFitSlotsBusiness.updateAvailability(currflipFitSlots);
+        if(flipFitSlots != null) {
+            int seatsAvailable = flipFitSlots.getSeatsAvailable();
+            flipFitSlots.setSeatsAvailable(seatsAvailable+1);
+
+            FlipFitSlotsBusiness flipFitSlotsBusiness = new FlipFitSlotsBusiness();
+            flipFitSlotsBusiness.updateAvailability(flipFitSlots);
+
+        }
 
         bookingDAO.deleteBooking(bookingId);
         return true;

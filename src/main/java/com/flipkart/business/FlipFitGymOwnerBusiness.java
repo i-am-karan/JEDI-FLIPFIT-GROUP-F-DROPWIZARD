@@ -1,17 +1,12 @@
 package com.flipkart.business;
 
+import com.flipkart.dao.*;
 import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
-import com.flipkart.dao.FlipFitGymCustomerDAOImpl;
-import com.flipkart.dao.FlipFitGymOwnerDAOImpl;
-import com.flipkart.dao.FlipFitUserDAOImpl;
 import com.flipkart.dao.interfaces.IFlipFitGymOwnerDAO;
 import com.flipkart.model.*;
 import com.flipkart.business.interfaces.IFlipFitGymOwner;
-import com.flipkart.exceptions.ExceptionHandler;
 import com.flipkart.exceptions.InvalidChoiceException;
-import com.flipkart.business.FlipFitAdminBusiness;
 import java.util.List;
-import java.util.Scanner;
 
 public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
     private final IFlipFitGymOwnerDAO flipFitGymOwnerDAO ;
@@ -23,13 +18,19 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         return flipFitGymOwnerDAO.addCentre(flipFitGymCentre);
     }
 
+    public FlipFitSlots addSlot(FlipFitSlots flipFitSlot){
+        FlipFitSlotDAOImpl flipFitSlotDAOImpl = new FlipFitSlotDAOImpl();
+        flipFitSlotDAOImpl.addSlot(flipFitSlot);
+        return flipFitSlot;
+    }
+
     public List<FlipFitGymCentre> viewCentres(FlipFitGymOwner flipFitGymOwner) {
         System.out.println("Centres listed:> ");
-        return flipFitGymOwnerDAO.viewCentres(flipFitGymOwner);
+        return flipFitGymOwnerDAO.viewCentresByOwnerID(flipFitGymOwner);
     }
-    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
-        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
-    }
+//    public List<FlipFitUser> viewFlipFitCustomers(FlipFitGymCentre flipFitGymCentre) {
+//        return flipFitGymOwnerDAO.viewFlipFitCustomers(flipFitGymCentre);
+//    }
     public List<FlipFitPayments> viewPayments() {
         System.out.println("Payments listed:> ");
         return null;
@@ -58,8 +59,10 @@ public class FlipFitGymOwnerBusiness implements IFlipFitGymOwner {
         user.setEmailID(GymOwner.getEmailID());
         user.setPhoneNumber(GymOwner.getPhoneNumber());
         user.setUserName(GymOwner.getUserName());
-        user.setRoleID(1);
-        flipFitGymOwnerDAO.addUser(user);
+        user.setRoleID(2);
+        GymOwner.setRole(2);
+
+        user=flipFitGymOwnerDAO.addUser(user);
         return flipFitGymOwnerDAO.addGymOwner(GymOwner, user);
     }
     @Override

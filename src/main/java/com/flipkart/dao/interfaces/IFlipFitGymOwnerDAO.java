@@ -39,6 +39,9 @@ public interface IFlipFitGymOwnerDAO {
      It takes owner as parameter and FlipFitGymOwner object containing the updated owner details.
      FlipFitGymOwner - Returns the updated FlipFitGymOwner object after changes have been saved.
      */
+
+    public List<FlipFitGymCentre> viewCentresByOwnerID(FlipFitGymOwner owner);
+
     public FlipFitGymOwner editDetails(FlipFitGymOwner owner);
 
     /**
