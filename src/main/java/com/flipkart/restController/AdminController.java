@@ -50,14 +50,14 @@ public class AdminController {
     @GET
     @Path("/getGymCentreUsingOwnerId/{ownerID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<FlipFitGymCentre> getGymCentreUsingOwnerId(@PathParam("ownerID") @NotBlank int ownerID) {
+    public List<FlipFitGymCentre> getGymCentreUsingOwnerId(@PathParam("ownerID") int ownerID) {
         return flipFitAdminBusiness.getGymCentreUsingOwnerId(ownerID);
     }
 
     @DELETE
     @Path("/deleteOwner/{ownerID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean deleteOwner(@PathParam("ownerID") @NotBlank int ownerID) {
+    public boolean deleteOwner(@PathParam("ownerID")  int ownerID) {
         return flipFitAdminBusiness.deleteOwner(ownerID);
     }
 
